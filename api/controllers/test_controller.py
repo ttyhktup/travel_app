@@ -1,4 +1,4 @@
 
 def return_london():
-    return {"city": "London"}
+    return f"city London"
 

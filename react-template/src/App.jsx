@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 
 const apiUrl = 'http://localhost:5000'; // Update the URL with your actual backend URL
 
 const fetchData = async () => {
     try {
-        const response = await fetch(`${apiUrl}/`);
+        const response = await fetch(`${apiUrl}/try`);
         if (!response.ok) {
             throw new Error('Network response was not ok.');
         }
-        const data = await response.text();
-        console.log(data);
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -30,7 +28,6 @@ const App = () => {
     const data = await fetchData(); // Fetch data when the function is called
     if (data !== null) 
     {
-      console.log(data)
       setFetchedData(data); // Update state with the fetched data
     }
   };
@@ -47,6 +44,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
