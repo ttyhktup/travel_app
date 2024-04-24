@@ -5,7 +5,7 @@ export const WelcomePage = () => {
     return (
         <div className="Welcome">
             <h1>Welcome to FuryRoam!</h1>
-            <Link to="/Continent">Start Quiz</Link>
+            <Link to="/ContinentPage">Start Quiz</Link>
         </div>
     );
 };

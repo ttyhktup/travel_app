@@ -4,12 +4,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //const apiUrl = 'http://localhost:5000'; // Update the URL with your actual backend URL
 
 import { WelcomePage } from './Pages/WelcomePage/WelcomePage'
+import { ContinentPage } from './Pages/ContinentPage/ContinentPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <WelcomePage/>,
   },
+
+  {
+    path: "/continent",
+    element: <ContinentPage/>
+  }
 ])
 
 
