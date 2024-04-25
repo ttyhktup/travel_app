@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PreferencesProvider } from './context/preferences';
 
 //const apiUrl = 'http://localhost:5000'; // Update the URL with your actual backend URL
 
 import { WelcomePage } from './Pages/WelcomePage/WelcomePage'
 import { ContinentPage } from './Pages/ContinentPage/ContinentPage';
+import { WeatherPage } from './Pages/WeatherPage/WeatherPage';
+import { RecommendationPage } from './Pages/RecommendationPage/RecommendationPage';
 
 const router = createBrowserRouter([
   {
@@ -13,19 +16,30 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/continent",
-    element: <ContinentPage/>
+    path: "/Continent",
+    element: <ContinentPage/>,
+  },  
+
+  {
+    path: "/Weather",
+    element: <WeatherPage/>
+  },
+
+  {
+    path: "/Recommendations",
+    element: <RecommendationPage/>
   }
 ])
 
 
 const App = () => {
   return (
-    <>
+    <PreferencesProvider>
       <RouterProvider router={router} />
-    </>
+    </PreferencesProvider>
   );
 };
+
 
 
 // const fetchData = async () => {
