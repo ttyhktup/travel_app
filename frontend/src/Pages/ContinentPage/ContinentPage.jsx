@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import { usePreferences } from "../../context/preferences";
 
@@ -12,10 +12,16 @@ export const ContinentPage = () => {
         Continent: [...preferences.Continent, continent]
       });
     };
-    
-        const handleLogging = () => {
-            console.log(preferences);
+        
+    const navigate = useNavigate();
+        const handleNextpage = () => {
+          console.log(preferences)
+          navigate('/Weather');
+        
+
+            
     }
+   
 
     
 
@@ -34,7 +40,7 @@ export const ContinentPage = () => {
       <button onClick={() => handleContinentSelect('North America')}>North America</button>
       <button onClick={() => handleContinentSelect('South America')}>South America</button>
       <button onClick={() => handleContinentSelect('Africa')}>Africa</button>
-      <button onClick={handleLogging}>Logging</button>
+      <button onClick={handleNextpage}>Next step</button>
         </div>
     )
 }

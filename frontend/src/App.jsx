@@ -6,6 +6,8 @@ import { PreferencesProvider } from './context/preferences';
 
 import { WelcomePage } from './Pages/WelcomePage/WelcomePage'
 import { ContinentPage } from './Pages/ContinentPage/ContinentPage';
+import { WeatherPage } from './Pages/WeatherPage/WeatherPage';
+import { RecommendationPage } from './Pages/RecommendationPage/RecommendationPage';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,17 @@ const router = createBrowserRouter([
 
   {
     path: "/Continent",
-    element: <ContinentPage/>
+    element: <ContinentPage/>,
+  },  
+
+  {
+    path: "/Weather",
+    element: <WeatherPage/>
+  },
+
+  {
+    path: "/Recommendations",
+    element: <RecommendationPage/>
   }
 ])
 
