@@ -29,8 +29,9 @@ export const WeatherPage = () => {
     const navigate = useNavigate();
     const handleNextpage = () => {
       console.log(preferences)
-      navigate('/Recommendations')
       sendTravelPreferences(preferences);
+      navigate('/Recommendations')
+      
     
 
     }
@@ -52,7 +53,7 @@ export const WeatherPage = () => {
       <button onClick={() => handleWeatherSelect(5, 14)}>I like cooler weather but not too cold (5°C - 14°C)</button>
       <button onClick={() => handleWeatherSelect(5, -1000)}>I prefer cold weather with snow and winter activities (below 5°C)</button>
       <button onClick={() => handleWeatherSelect(-1000, 1000)}>I have no strong preference for weather.</button>
-      <button onClick={handleNextpage}>Logging</button>
+      <button onClick={handleNextpage}>Generate Result</button>
         </div>
     )
 }
