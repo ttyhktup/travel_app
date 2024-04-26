@@ -1,11 +1,11 @@
 import json
 import urllib
 import requests
-from Location import Location
-from get_cities import get_cities
+from lib.Location import Location
+from lib.get_cities import get_cities
 
 
-def get_countries(continent):
+def get_countries(continent, min_temp, max_temp):
     if continent == "Africa":
         continent = "X2rEcTJnsE"
     elif continent == "North America":
@@ -40,11 +40,9 @@ def get_countries(continent):
     
 
     locations_lst = []
-
+    
     for country in countries.items():
         new_location = Location(country[0], country[1])
         locations_lst.append(new_location)
-        new_location.get_weather(50, 0)
-
-
-get_countries("Asia")
+        new_location.get_weather(max_temp, min_temp)
+    return locations_lst
