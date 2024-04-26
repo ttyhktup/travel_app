@@ -13,13 +13,14 @@ def receive_preferences():
         data = request.get_json()
         # Process the received data as needed
         print("Received data:", data)
-        continent = data['Continent'][0]
+        continents = data['Continent']
+        continent_count= len(continents)
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
-        print(continent)
-        print(min_temp)
-        locations_lst = get_countries(continent, min_temp, max_temp)
-        print(locations_lst)
+        locations_lst = []
+        for continent in continents:
+            locations = get_countries(continent, min_temp, max_temp, continent_count)
+            locations_lst = locations_lst + locations
         result = [location.city_weather for location in locations_lst if len(location.city_weather) != 0]
         print(result)
         return jsonify(result), 201
