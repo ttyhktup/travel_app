@@ -1,10 +1,9 @@
 import json
 import urllib
-from get_cities import get_cities
+from lib.get_cities import get_cities
 import requests
 from pathlib import Path
-import api
-
+import lib.api
 
 class Location():
   def __init__(self, country_id, country_name):
@@ -16,7 +15,7 @@ class Location():
   def get_weather(self, maxTemp = 100,  minTemp = -50):
 
     for city in self.cities:
-      url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&date=`2024-04-26`&units=metric&appid={api.API_KEY}"
+      url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&date=`2024-04-26`&units=metric&appid={lib.api.API_KEY}"
       response = requests.get(url)
       if response.status_code == 200:
         weather_data = response.json()
@@ -27,5 +26,3 @@ class Location():
           self.city_weather[city] = [self.country_name, temp]
       else:
         pass
-
-    print(self.city_weather)
