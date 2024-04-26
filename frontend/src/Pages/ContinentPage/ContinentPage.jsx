@@ -7,11 +7,13 @@ export const ContinentPage = () => {
     const { preferences, setPreferences } = usePreferences();
   
     const handleContinentSelect = (continent) => {
-      setPreferences({
-        ...preferences,
-        Continent: [...preferences.Continent, continent]
-      });
-    };
+      if (!preferences.Continent.includes(continent)) {
+          setPreferences({
+              ...preferences,
+              Continent: [...preferences.Continent, continent]
+          });
+      }
+  };
         
     const navigate = useNavigate();
         const handleNextpage = () => {

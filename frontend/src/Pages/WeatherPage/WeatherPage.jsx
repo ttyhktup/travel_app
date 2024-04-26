@@ -9,13 +9,22 @@ export const WeatherPage = () => {
     const { preferences, setPreferences } = usePreferences();
   
     const handleWeatherSelect = (mintemp, maxtemp) => {
-      setPreferences({
-        ...preferences,
-        MinTemp: [...preferences.MinTemp, mintemp],
-        MaxTemp: [...preferences.MaxTemp, maxtemp],
+      
+      if (!preferences.MinTemp.includes(mintemp)) {
+        setPreferences((prevPreferences) => ({
+            ...prevPreferences,
+            MinTemp: [...prevPreferences.MinTemp, mintemp]
+        }));
+    }
 
-      });
-    };
+    // Check if the max temp is already selected; if not, add it to the array
+    if (!preferences.MaxTemp.includes(maxtemp)) {
+        setPreferences((prevPreferences) => ({
+            ...prevPreferences,
+            MaxTemp: [...prevPreferences.MaxTemp, maxtemp]
+        }));
+    }
+};
     
     const navigate = useNavigate();
     const handleNextpage = () => {
