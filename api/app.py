@@ -16,8 +16,12 @@ def receive_preferences():
         continent = data['Continent'][0]
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
+        print(continent)
+        print(min_temp)
         locations_lst = get_countries(continent, min_temp, max_temp)
+        print(locations_lst)
         result = [location.city_weather for location in locations_lst if len(location.city_weather) != 0]
+        print(result)
         return jsonify(result), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 400

@@ -2,7 +2,7 @@ import json
 import urllib
 from lib.get_cities import get_cities
 import requests
-from pathlib import Path
+from pathlib import Path 
 import lib.api
 
 class Location():
