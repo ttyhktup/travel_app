@@ -25,15 +25,11 @@ def receive_preferences():
         
         start_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
         end_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
-        
-        print(start_date)
-        print(end_date)
+        # ^ Creating datetime objects from dates passed in and minusing a year from them ^
         
         start_date = datetime.strftime(start_date, '%Y-%m-%d')
         end_date = datetime.strftime(end_date, '%Y-%m-%d')
-        
-        print(start_date)
-        print(end_date)
+        # ^ Turning processed datetime objects back into strings ^ 
         
         locations_lst = []
         
@@ -42,7 +38,6 @@ def receive_preferences():
             locations_lst = locations_lst + locations
         
         result = [location.city_weather for location in locations_lst if len(location.city_weather) != 0]
-        print(result)
         return jsonify(result), 201
     
     except Exception as e:
