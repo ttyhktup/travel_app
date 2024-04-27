@@ -46,7 +46,7 @@ class Location():
         # We don't need to return anything from this function. Adding items to the dictionary is all we need to do at the end.  
         
       else: 
-        pass
+        print(f"error: {response.status_code}, couldn't retrieve weather")
     
 
 
