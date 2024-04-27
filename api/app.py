@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from lib.get_countries import *
 from flask import jsonify
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 # Create the Flask app
 app = Flask(__name__)
 CORS(app) 
@@ -19,10 +22,23 @@ def receive_preferences():
         continent_count= len(continents)
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
+        
+        start_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
+        end_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
+        
+        print(start_date)
+        print(end_date)
+        
+        start_date = datetime.strftime(start_date, '%Y-%m-%d')
+        end_date = datetime.strftime(end_date, '%Y-%m-%d')
+        
+        print(start_date)
+        print(end_date)
+        
         locations_lst = []
         
         for continent in continents:
-            locations = get_countries(continent, min_temp, max_temp, continent_count)
+            locations = get_countries(continent, min_temp, max_temp, continent_count, start_date, end_date)
             locations_lst = locations_lst + locations
         
         result = [location.city_weather for location in locations_lst if len(location.city_weather) != 0]

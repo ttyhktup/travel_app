@@ -1,8 +1,8 @@
 import json
 import urllib
 import requests
-from Location import Location
-from get_cities import get_cities
+from lib.Location import Location
+from lib.get_cities import get_cities
 
 def get_countries(continent, min_temp, max_temp, continent_count, start_date, end_date):
     if continent == "Africa":
@@ -67,6 +67,7 @@ def get_countries(continent, min_temp, max_temp, continent_count, start_date, en
     locations_lst = [] # This is the list that is returned from this function and passed to the API file. 
     
     for country in countries.items():
+        print(country)
         new_location = Location(country[0], country[1])
         locations_lst.append(new_location)
         new_location.get_weather(min_temp, max_temp, start_date, end_date)

@@ -1,9 +1,8 @@
 import json
 import urllib
-from get_cities import get_cities
+from lib.get_cities import get_cities
 import requests
 from pathlib import Path 
-import api
 import statistics 
 # "2023-07-13"
 class Location():
@@ -16,6 +15,8 @@ class Location():
   def get_weather(self, minTemp = -50, maxTemp = 100, start_date = "2023-07-13", end_date = "2023-07-15"):
     
     for city in self.cities: 
+      
+      
       url = "https://archive-api.open-meteo.com/v1/archive"
       
       params = {
