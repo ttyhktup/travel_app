@@ -7,6 +7,7 @@ const formatDate = (date) => {
   return formattedDate;
 };
 
+// eslint-disable-next-line react/prop-types
 export const PreferencesProvider = ({ children }) => {
   const [preferences, setPreferences] = useState({
     Continent: [],
