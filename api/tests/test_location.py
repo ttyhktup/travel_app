@@ -47,3 +47,4 @@ def test_get_hotel_link(mocker):
     test_location = Location("123", "fake_country")
     link = test_location.get_hotel_link("city1", "2023-07-13", "2023-07-15")
     assert link == "https://www.booking.com/searchresults.en-gb.html?ss=city1&checkin=2024-07-13&checkout=2024-07-15&group_adults=2&no_rooms=1&group_children=0"
+
