@@ -12,6 +12,7 @@ dotenv-python = "*"
 python-dotenv = "*"
 pandas = "*"
 amadeus = "*"
+pytest-mock = "*"
 
 [dev-packages]
 
