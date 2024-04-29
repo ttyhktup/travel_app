@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PreferencesProvider } from './context/preferences';
+import { DatePickerPage } from './Pages/DatePickerPage/DatePicker';
 
 //const apiUrl = 'http://localhost:5000'; // Update the URL with your actual backend URL
 
@@ -19,7 +20,10 @@ const router = createBrowserRouter([
     path: "/Continent",
     element: <ContinentPage/>,
   },  
-
+  {
+    path: "/date",
+    element: <DatePickerPage/>,
+  },
   {
     path: "/Weather",
     element: <WeatherPage/>

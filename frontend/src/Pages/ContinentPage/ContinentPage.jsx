@@ -6,20 +6,20 @@
   export const ContinentPage = () => {
   const { preferences, setPreferences } = usePreferences();
 
-  const handleContinentSelect = (continent) => {
-  if (!preferences.Continent.includes(continent)) {
-  setPreferences({
-  ...preferences,
-  Continent: [...preferences.Continent, continent]
-  });
-  }
-  };
-
-  const navigate = useNavigate();
-  const handleNextpage = () => {
-  console.log(preferences)
-  navigate('/Weather');
-  }
+    const handleContinentSelect = (continent) => {
+    if (!preferences.Continent.includes(continent)) {
+        setPreferences({
+            ...preferences,
+            Continent: [...preferences.Continent, continent]
+        });
+    }
+};
+        
+    const navigate = useNavigate();
+        const handleNextpage = () => {
+        console.log(preferences)
+        navigate('/date');
+    }
 
   return (
   <div className="continent-container">

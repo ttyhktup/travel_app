@@ -23,8 +23,8 @@ def receive_preferences():
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
         
-        start_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
-        end_date = datetime.strptime(data['Date'], '%Y-%m-%d') - relativedelta(years=1)
+        start_date = datetime.strptime(data['startD'][0], '%Y-%m-%d') - relativedelta(years=1)
+        end_date = datetime.strptime(data['endD'][0], '%Y-%m-%d') - relativedelta(years=1)
         # ^ Creating datetime objects from dates passed in and minusing a year from them ^
         
         start_date = datetime.strftime(start_date, '%Y-%m-%d')
