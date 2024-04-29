@@ -18,7 +18,7 @@ export const ContinentPage = () => {
     const navigate = useNavigate();
         const handleNextpage = () => {
         console.log(preferences)
-        navigate('/Weather');
+        navigate('/date');
     }
 
     return (

@@ -13,8 +13,8 @@ export const PreferencesProvider = ({ children }) => {
     Continent: [],
     MinTemp: [],
     MaxTemp: [],
-    Date: formatDate(Date.now())
-  
+    startD: [],
+    endD: []
   });
 
   return (
