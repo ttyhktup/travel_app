@@ -53,6 +53,7 @@ export const DatePickerPage = () => {
     }
     return (
         <div className="mt-2 w-100 h-50 d-flex justify-content-center">
+        <p>Select a Date</p>
         <DatePicker
             startDate={startDate}
             endDate={endDate}
