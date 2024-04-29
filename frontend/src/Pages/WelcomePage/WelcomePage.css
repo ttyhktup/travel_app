@@ -1,0 +1,53 @@
+.welcome-container {
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.welcome-info{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.welcome-image{
+  min-height: 50em;
+  min-width: 50%;
+  background-image: url("/src/assets/welcome_page_photo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.welcome-logo img{
+  width: 45px;
+  height: 45px;
+}
+
+.welcome-content {
+  padding-top: 25%;
+  padding-right: 10%;
+  padding-left: 10%;
+  text-align: center;
+}
+
+.welcome-content h1 {
+  color: rgb(78, 78, 78);
+  margin-bottom: 20px;
+}
+
+.welcome-button {
+  height: 40px;
+  width: 130px;
+  background-color: #4cb7aa;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.welcome-button:hover{
+  background-color: #439d93;
+}
