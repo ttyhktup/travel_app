@@ -1,40 +1,21 @@
 from amadeus import Client, ResponseError 
 from api import AMADEUS_API_KEY, AMADEUS_API_SECRET
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
-def get_hotels():
-    amadeus = Client(
-        client_id = AMADEUS_API_KEY,
-        client_secret = AMADEUS_API_SECRET
-    )
-
-    hotelData = {}
-
-    try: 
-        response = amadeus.reference_data.locations.hotels.by_geocode.get(longitude=-0.11,latitude=51.50)
-        for item in response.data:
-            hotelData[item['hotelId']] = item['name']
-            
-            
-            
-    except ResponseError as error:
-        print(error)
+def get_hotels(city, start_date, end_date):
     
-
-    try:
-        for hotel in hotelData.items():
-
-            response = amadeus.shopping.hotel_offers_search.get(hotelIds=f'{hotel[0]}', adults='2')
-            print(response.data)
+    # adding year back on 
+    start_date = datetime.strptime(start_date, '%Y-%m-%d') + relativedelta(years=1)
+    end_date = datetime.strptime(end_date, '%Y-%m-%d') + relativedelta(years=1)
     
-    except ResponseError as error:
-        print(error)
-        
+    # converting back to string
+    start_date = datetime.strftime(start_date, '%Y-%m-%d')
+    end_date = datetime.strftime(end_date, '%Y-%m-%d')
     
-get_hotels()
+    # formatting values into booking.com url
+    booking_string = f"https://www.booking.com/searchresults.en-gb.html?ss={city}&checkin={start_date}&checkout={end_date}&group_adults=2&no_rooms=1&group_children=0"
+    
+    return booking_string
 
-# # Hotel Search v3
-# # Get list of available offers by hotel ids
-# amadeus.shopping.hotel_offers_search.get(hotelIds='RTPAR001', adults='2')
 
-# # Check conditions of a specific offer
-# amadeus.shopping.hotel_offer_search('XXX').get()
