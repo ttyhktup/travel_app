@@ -1,6 +1,4 @@
-
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../../context/preferences";
 import { sendTravelPreferences } from "../../Services/BackendService";
 
