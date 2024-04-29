@@ -3,57 +3,60 @@ import { usePreferences } from "../../context/preferences";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
+import "./DatePicker.css"
 
 export const DatePickerPage = () => {
-    const { preferences, setPreferences } = usePreferences();
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+const { preferences, setPreferences } = usePreferences();
+const [startDate, setStartDate] = useState(new Date());
+const [endDate, setEndDate] = useState(new Date());
+
+const formatDate = (dateObj) => {
     
-    const formatDate = (dateObj) => {
-        
-        console.log(dateObj)
-        const months = {
-        Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-        Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
-        };
-        
-        const day = dateObj.getDate().toString().padStart(2, '0');
-        const month = months[dateObj.toLocaleString('en-US', { month: 'short' })];
-        const year = dateObj.getFullYear();
+    console.log(dateObj)
+    const months = {
+    Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+    Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+    };
     
-        return `${year}-${month}-${day}`;
-    };
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const month = months[dateObj.toLocaleString('en-US', { month: 'short' })];
+    const year = dateObj.getFullYear();
 
-    const onChange = (dates) => {
-        const [start, end] = dates;
-        setStartDate(start);
-        setEndDate(end);
-        console.log(endDate)
-    };
+    return `${year}-${month}-${day}`;
+};
 
-    const handleDateSelect = (start, end) => {
-        if (!preferences.startD.includes(start) || !preferences.endD.includes(end)) {
-            setPreferences({
-                ...preferences,
-                startD: [...preferences.startD, start],
-                endD: [...preferences.endD, end]
-            });
-        }
-        console.log(preferences)
-    };
+const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    console.log(endDate)
+};
 
-    const navigate = useNavigate();
-        
-    const handleNextpage = () => {
-        let start = formatDate(startDate)
-        let end = formatDate(endDate)
-        handleDateSelect(start, end)
-        console.log(preferences)
-        navigate('/Weather');
+const handleDateSelect = (start, end) => {
+    if (!preferences.startD.includes(start) || !preferences.endD.includes(end)) {
+        setPreferences({
+            ...preferences,
+            startD: [...preferences.startD, start],
+            endD: [...preferences.endD, end]
+        });
     }
-    return (
-        <div className="mt-2 w-100 h-50 d-flex justify-content-center">
-        <p>Select a Date</p>
+    console.log(preferences)
+};
+
+const navigate = useNavigate();
+    
+const handleNextpage = () => {
+    let start = formatDate(startDate)
+    let end = formatDate(endDate)
+    handleDateSelect(start, end)
+    console.log(preferences)
+    navigate('/Weather');
+}
+
+return (
+    <div className="date-container">
+      <h4>2. Select a Date</h4>
+      <div className="date-picker-container">
         <DatePicker
             startDate={startDate}
             endDate={endDate}
@@ -61,7 +64,8 @@ export const DatePickerPage = () => {
             selectsRange
             inline
         />
-        <button onClick={handleNextpage}>Next step</button>
-        </div>
-    );
+      </div>
+      <button className="date-button" onClick={handleNextpage}>Next step</button>
+    </div>
+);
 }

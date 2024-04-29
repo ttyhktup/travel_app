@@ -32,10 +32,7 @@ export const WeatherPage = () => {
 
     return (
         <div className="Weather">
-            <header>
-                <h3>Furyroam</h3>
-            </header>
-            <h3>2. What weather would you prefer?</h3>
+            <h3>3. What weather would you prefer?</h3>
             <button onClick={() => handleWeatherSelect(30, 1000)}>I prefer hot weather (above 30°C)</button>
             <button onClick={() => handleWeatherSelect(20, 29)}>I prefer warm weather and sunshine (20°C - 29°C)</button>
             <button onClick={() => handleWeatherSelect(15, 19)}>I enjoy mild temperatures with a mix of sun and clouds (15°C - 19°C)</button>

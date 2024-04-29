@@ -5,20 +5,6 @@
   min-height: 80vh;
 }
 
-header{
-  background-color: #5BD0C2;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-header img{
-  margin-right: 20px;
-  margin-left: 10px;
-  height: 45px;
-  width: 45px;
-}
-
 .continent-body{
   display: flex;
   justify-content: space-around;
