@@ -10,7 +10,7 @@ def get_hotels():
     try: 
         response = amadeus.reference_data.locations.hotels.by_geocode.get(longitude=-0.11,latitude=51.50)
         for item in response.data:
-            print(item['name'])
+            print(item)
     except ResponseError as error:
         print(error)
 
