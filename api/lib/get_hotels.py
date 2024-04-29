@@ -7,13 +7,29 @@ def get_hotels():
         client_secret = AMADEUS_API_SECRET
     )
 
+    hotelData = {}
+
     try: 
         response = amadeus.reference_data.locations.hotels.by_geocode.get(longitude=-0.11,latitude=51.50)
         for item in response.data:
-            print(item)
+            hotelData[item['hotelId']] = item['name']
+            
+            
+            
     except ResponseError as error:
         print(error)
+    
 
+    try:
+        for hotel in hotelData.items():
+
+            response = amadeus.shopping.hotel_offers_search.get(hotelIds=f'{hotel[0]}', adults='2')
+            print(response.data)
+    
+    except ResponseError as error:
+        print(error)
+        
+    
 get_hotels()
 
 # # Hotel Search v3
