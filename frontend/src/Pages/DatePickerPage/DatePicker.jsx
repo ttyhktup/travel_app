@@ -28,27 +28,19 @@ export const DatePickerPage = () => {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
-        console.log(startDate)
         console.log(endDate)
     };
 
     const handleDateSelect = (start, end) => {
-        
-        if (!preferences.startD.includes(start)) {
+        if (!preferences.startD.includes(start) || !preferences.endD.includes(end)) {
             setPreferences({
                 ...preferences,
-                startD: [...preferences.startD, start]
-            });
-        }
-
-        if (!preferences.endD.includes(end)) {
-            setPreferences({
-                ...preferences,
+                startD: [...preferences.startD, start],
                 endD: [...preferences.endD, end]
             });
         }
         console.log(preferences)
-    }
+    };
 
     const navigate = useNavigate();
         
@@ -62,10 +54,9 @@ export const DatePickerPage = () => {
     return (
         <div className="mt-2 w-100 h-50 d-flex justify-content-center">
         <DatePicker
-            selected={startDate}
-            onChange={onChange}
             startDate={startDate}
             endDate={endDate}
+            onChange={onChange}
             selectsRange
             inline
         />
