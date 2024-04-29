@@ -1,5 +1,3 @@
-from amadeus import Client, ResponseError 
-from api import AMADEUS_API_KEY, AMADEUS_API_SECRET
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
