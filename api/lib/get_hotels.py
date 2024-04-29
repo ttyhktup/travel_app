@@ -3,7 +3,7 @@ from api import AMADEUS_API_KEY, AMADEUS_API_SECRET
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-def get_hotels(city, start_date, end_date):
+def get_hotel_link(city, start_date, end_date):
     
     # adding year back on 
     start_date = datetime.strptime(start_date, '%Y-%m-%d') + relativedelta(years=1)
