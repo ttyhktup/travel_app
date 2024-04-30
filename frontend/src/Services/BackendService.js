@@ -1,9 +1,12 @@
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const apiUrl = 'http://localhost:5000';
 
 let cachedCitiesArray = null;
 
 export const sendTravelPreferences = async (preferences) => {
   console.log("sending signal to backend", preferences);
+  console.log(BACKEND_URL);
   const requestOptions = {
     method: "POST",
     headers: {
@@ -12,7 +15,7 @@ export const sendTravelPreferences = async (preferences) => {
     body: JSON.stringify(preferences),
   };
 
-  const response = await fetch(`${apiUrl}/preferences`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/preferences`, requestOptions);
 
   if (response.status !== 201) {
     throw new Error("Unable to send travel preferences");
