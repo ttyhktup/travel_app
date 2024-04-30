@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <ContinentPage/>,
   },  
   {
-    path: "/date",
+    path: "/Date",
     element: <DatePickerPage/>,
   },
   {

@@ -1,3 +1,5 @@
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import json
 import urllib
 from lib.get_cities import get_cities
@@ -5,6 +7,7 @@ import requests
 from pathlib import Path 
 import statistics 
 # "2023-07-13"
+
 class Location():
   def __init__(self, country_id, country_name):
     self.country_id = country_id
@@ -39,7 +42,8 @@ class Location():
         if (minTemp >= temp) or (temp >= maxTemp): # checking if temp is outside our min temp max temp range 
           pass
         else:
-          self.city_weather[city['name']] = [self.country_name, temp] 
+          hotel_link = self.get_hotel_link(city['name'], start_date, end_date)
+          self.city_weather[city['name']] = [self.country_name, temp, hotel_link] 
         
         # if it's fine we create a dictionary key:value pair in our city_weather param - seen in the init method of this class - that has 
         # the city name as the key then a list containing the country name and average temperature as its value. 
@@ -47,7 +51,20 @@ class Location():
         
       else: 
         print(f"error: {response.status_code}, couldn't retrieve weather")
+
+  def get_hotel_link(self, city, start_date, end_date):
     
-
-
-
+    # adding year back on 
+    start_date = datetime.strptime(start_date, '%Y-%m-%d') + relativedelta(years=1)
+    end_date = datetime.strptime(end_date, '%Y-%m-%d') + relativedelta(years=1)
+    
+    # converting back to string
+    start_date = datetime.strftime(start_date, '%Y-%m-%d')
+    end_date = datetime.strftime(end_date, '%Y-%m-%d')
+    
+    # formatting values into booking.com url
+    booking_string = f"https://www.booking.com/searchresults.en-gb.html?ss={city}&checkin={start_date}&checkout={end_date}&group_adults=2&no_rooms=1&group_children=0"
+    
+    return booking_string  
+  
+  
