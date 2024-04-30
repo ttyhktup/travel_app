@@ -7,6 +7,20 @@
   background-color: #ffffff;
 }
 
+header{
+  background-color: #5BD0C2;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+header img{
+  margin-right: 20px;
+  margin-left: 10px;
+  height: 45px;
+  width: 45px;
+}
+
 body {
   margin: 0;
   place-items: center;

@@ -5,20 +5,6 @@
   min-height: 80vh;
 }
 
-header{
-  background-color: #5BD0C2;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-header img{
-  margin-right: 20px;
-  margin-left: 10px;
-  height: 45px;
-  width: 45px;
-}
-
 .continent-body{
   display: flex;
   justify-content: space-around;
@@ -26,10 +12,14 @@ header img{
   align-items: center;
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 5%;
 }
 
 .continent-body h4{
   margin-top: 40px;
+}
+
+.continent-body p {
   margin-bottom: 50px;
 }
 
@@ -39,20 +29,42 @@ header img{
   text-align: center;
 }
 
-.continent-images img{
-  width: 200px;
-  height: 200px;
-  opacity: 0.5;
-}
-
-.continent-images img:hover{
-  width: 200px;
-  height: 200px;
-  opacity: 0.7;
-}
-
 .continent-items{
   margin-right: 50px;
   margin-left: 50px;
   margin-bottom: 20px;
+  color: rgb(72, 72, 72);
+}
+
+.continent-image-item{
+  width: 180px;
+  height: 180px;
+  opacity: 0.5;
+}
+
+.continent-image-item:hover{
+  width: 180px;
+  height: 180px;
+  opacity: 0.7;
+  transition: opacity 0.5s ease-out;
+}
+
+.clicked {
+  width: 182px;
+  height: 182px;
+  opacity: 0.7;
+}
+
+.continent-button {
+  height: 40px;
+  width: 130px;
+  background-color: #4cb7aa;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.continent-button:hover{
+  background-color: #439d93;
 }
