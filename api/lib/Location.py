@@ -33,7 +33,9 @@ class Location():
       response = requests.get(url, params=params)
       if response.status_code == 200:
         weather_data = response.json()['hourly'] 
+        
         temp = weather_data['temperature_2m'] # Getting the weather data we want from the API - this will be a list of temps for the given period
+        print(temp)
         temp = statistics.mean(temp) // 1 
         
         # This API returns a list of temperatures and we want an average, the above code uses the statistics module to calculate the mean 
@@ -50,7 +52,7 @@ class Location():
         # We don't need to return anything from this function. Adding items to the dictionary is all we need to do at the end.  
         
       else: 
-        print(f"error: {response.status_code}, couldn't retrieve weather")
+        print(f"error: {response.status_code} {response.reason}, couldn't retrieve weather")
 
   def get_hotel_link(self, city, start_date, end_date):
     

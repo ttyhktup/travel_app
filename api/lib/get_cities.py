@@ -14,8 +14,8 @@ def get_cities(country_id):
             "$gt": 2000
         }}
     }}
-    """)
-    url = 'https://parseapi.back4app.com/classes/City?limit=10&where=%s' % where
+    """) # LIMITED CITIES TO 1 HERE-------------------------v                         
+    url = 'https://parseapi.back4app.com/classes/City?limit=1&where=%s' % where
     headers = {
         'X-Parse-Application-Id': 'mxsebv4KoWIGkRntXwyzg6c6DhKWQuit8Ry9sHja', # This is the fake app's application id
         'X-Parse-Master-Key': 'TpO0j3lG2PmEVMXlKYQACoOXKQrL3lwM0HwR9dbH' # This is the fake app's readonly master key
