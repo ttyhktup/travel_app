@@ -22,7 +22,8 @@ const MapboxMap = (props) => {
         document.getElementById('fly').addEventListener('click', () => {
             // Fly to a random location
             map.flyTo({
-                center: [(Math.random() - 0.5) * 360, (Math.random() - 0.5) * 100],
+                zoom: 9,
+                center: [2.3514, 48.8575],
                 essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
         });
@@ -112,12 +113,15 @@ export const RecommendationPage = () => {
             <MapboxMap latitude={latitude} longitude={longitude} zoom={zoom}/> 
             <br></br>
             <button id="fly">Fly</button>
+            <Location cityName="London" countryName="Britain" Temp="12" bookingLink="link"/>
+            <br></br>
             {!loading && citiesArray && (
                 <div>
                     {citiesArray.map((continentData, index) => (
                         <div key={index}>
                             {Object.keys(continentData).map(city => (
                                 <Location key={city} cityName={city} countryName={continentData[city][0]} Temp={continentData[city][1]} bookingLink={continentData[city][2]}/>
+                                
                             ))}
                         </div>
                     ))}   

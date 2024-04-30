@@ -4,6 +4,9 @@
   position: relative; /* Position can be absolute or relative based on your layout needs */
   top: 5px; /* Adjust based on layout */
   left: 20px; /* Adjust based on layout */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 #fly {
     display: block;
@@ -19,3 +22,4 @@
     color: #fff;
     background: #4cb7aa;
 }
+
