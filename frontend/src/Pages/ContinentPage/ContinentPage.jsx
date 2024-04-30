@@ -24,7 +24,7 @@
     const navigate = useNavigate();
         const handleNextpage = () => {
         console.log(preferences)
-        navigate('/date');
+        navigate('/Date');
     }
     
     const [EuropeClass, setEuropeClass] = useState("continent-image-item")
