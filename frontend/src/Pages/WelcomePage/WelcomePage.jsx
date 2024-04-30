@@ -20,9 +20,9 @@ export const WelcomePage = () => {
     <div className="welcome-container">
 
       <div className="welcome-info">
-        <div className="welcome-logo">
+        {/* <div className="welcome-logo">
           <img src="/src/assets/plane.png" alt="" />
-        </div>
+        </div> */}
         
         <div className="welcome-content">
           <h1>Welcome to FuryRoam!</h1>

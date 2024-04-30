@@ -1,7 +1,7 @@
 .welcome-container {
   display: flex;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 70vh;
 }
 
 .welcome-info{
@@ -12,7 +12,7 @@
 }
 
 .welcome-image{
-  min-height: 50em;
+  min-height: 90vh;
   min-width: 50%;
   background-image: url("/src/assets/welcome_page_photo.jpg");
   background-repeat: no-repeat;
