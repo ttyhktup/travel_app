@@ -1,7 +1,5 @@
 const apiUrl = 'http://localhost:5000';
 
-let cachedCitiesArray = null;
-
 export const sendTravelPreferences = async (preferences) => {
   console.log("sending signal to backend", preferences);
   const requestOptions = {
@@ -19,16 +17,9 @@ export const sendTravelPreferences = async (preferences) => {
   }
 
   const citiesArray = await response.json();
-  console.log(citiesArray);
-  cachedCitiesArray = citiesArray; // Cache the cities array
   return citiesArray; // Return the cities array directly
 };
 
-export const getCachedCitiesArray = () => {
-  return cachedCitiesArray;
-};
-
-let response_json = null;
 
 export const sendContinents = async (continents) => {
   console.log("sending signal to backend", continents);
@@ -47,6 +38,5 @@ export const sendContinents = async (continents) => {
   }
 
   const new_response = await response.json();
-  response_json = new_response;
-  return response_json;
+  return new_response
 };

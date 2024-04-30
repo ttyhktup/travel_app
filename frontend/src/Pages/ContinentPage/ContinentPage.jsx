@@ -49,10 +49,23 @@
 
     const navigate = useNavigate();
     const handleNextpage = () => {
-    console.log(preferences)
-    sendContinents(preferences["Continent"]);
-    console.log(preferences["Continent"])
+    let continents = []
+    continents = preferences.Continent
+    console.log(continents)
+    const getContinents = async (continents) => {
+      const data = await sendContinents(continents);
+      
+      if (!preferences.citiesData.includes(data)){
+        setPreferences((prevPreferences) => ({
+            ...prevPreferences,
+            citiesData: [...prevPreferences.citiesData, data]
+        }));
+    }
     navigate('/Date');
+      return data
+    }
+    const data = getContinents(continents)
+    console.log(data)
   }
 
   return (

@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from lib.get_countries import *
+from lib.get_cities import *
+from lib.Location import *
 from flask import jsonify
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -9,20 +11,36 @@ from dateutil.relativedelta import relativedelta
 app = Flask(__name__)
 CORS(app) 
 
+@app.route('/continents', methods=['POST'])
+def receive_continents():
+    try:
+        data = request.get_json()
+        continents = data
+        # result = "Continents' list received succesfully"
+        continent_count = len(continents)
+        country_list = {}
+        for continent in continents:
+            country_list.update(get_countries(continent, continent_count))
+        cities_by_country_dict = {}
+        for id, country_name in country_list.items():
+            cities = get_cities(id)
+            cities_by_country_dict[country_name] = cities
+        return jsonify(cities_by_country_dict), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 @app.route('/preferences', methods=['POST'])
 def receive_preferences():
     try:
         data = request.get_json()
+        print(data)
         # Process the received data as needed
-        
-        print("Received data:", data)
-        
-        continents = data['Continent']
-        continent_count= len(continents)
+        cities_by_country_dict = data['citiesData'][0]
+        print(cities_by_country_dict)
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
-        
         start_date = datetime.strptime(data['startD'][0], '%Y-%m-%d') - relativedelta(years=1)
         end_date = datetime.strptime(data['endD'][0], '%Y-%m-%d') - relativedelta(years=1)
         # ^ Creating datetime objects from dates passed in and minusing a year from them ^
@@ -32,13 +50,13 @@ def receive_preferences():
         # ^ Turning processed datetime objects back into strings ^ 
         
         locations_lst = []
-        
-        for continent in continents:
-            locations = get_countries(continent, min_temp, max_temp, continent_count, start_date, end_date)
-            locations_lst = locations_lst + locations
-        
-        result = [location.city_weather for location in locations_lst if len(location.city_weather) != 0]
-        return jsonify(result), 201
+
+        for country_name, cities in cities_by_country_dict.items():
+            location = Location(country_name, cities)
+            location.get_weather(min_temp, max_temp, start_date, end_date)
+            city_details = location.city_details
+            locations_lst.append(city_details)
+        return jsonify(locations_lst), 201
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400
