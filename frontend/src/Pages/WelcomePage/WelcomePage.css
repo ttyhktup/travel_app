@@ -14,7 +14,7 @@
 .welcome-image{
   min-height: 50em;
   min-width: 50%;
-  background-image: url("/src/assets/welcome_page_photo.jpg");
+  background-image: url("/assets/welcome_page_photo.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

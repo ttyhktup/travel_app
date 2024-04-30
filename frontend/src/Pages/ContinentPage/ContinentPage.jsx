@@ -59,27 +59,27 @@
       <p>If you don't have a specific preference click next without selecting a continent.</p>
       <div className="continent-images">
           <div className="continent-items">
-            <img className={EuropeClass} onClick={() => {handleContinentSelect('Europe'); addClassToEurope()}} src="/src/assets/europe.png" alt="" />
+            <img className={EuropeClass} onClick={() => {handleContinentSelect('Europe'); addClassToEurope()}} src="/assets/europe.png" alt="" />
             <p>Europe</p>
           </div>
           <div className="continent-items">
-            <img className={AsiaClass} onClick={() => {handleContinentSelect('Asia'); addClassToAsia()}} src="/src/assets/asia.png" alt="" />
+            <img className={AsiaClass} onClick={() => {handleContinentSelect('Asia'); addClassToAsia()}} src="/assets/asia.png" alt="" />
             <p>Asia</p>
           </div>
           <div className="continent-items">
-            <img className={OceaniaClass} onClick={() => {handleContinentSelect('Oceania'); addClassToOceania()}} src="/src/assets/oceania.png" alt="" />
+            <img className={OceaniaClass} onClick={() => {handleContinentSelect('Oceania'); addClassToOceania()}} src="/assets/oceania.png" alt="" />
             <p>Oceania</p>
           </div>
           <div className="continent-items">
-            <img className={NorthAmericaClass} onClick={() => {handleContinentSelect('North America'); addClassToNorthAmerica()}} src="/src/assets/north-america.png" alt="" />
+            <img className={NorthAmericaClass} onClick={() => {handleContinentSelect('North America'); addClassToNorthAmerica()}} src="/assets/north-america.png" alt="" />
             <p>North America</p>
           </div>
           <div className="continent-items">
-            <img className={SouthAmericaClass} onClick={() => {handleContinentSelect('South America'); addClassToSouthAmerica()}} src="/src/assets/south-america.png" alt="" />
+            <img className={SouthAmericaClass} onClick={() => {handleContinentSelect('South America'); addClassToSouthAmerica()}} src="/assets/south-america.png" alt="" />
             <p>South America</p>
           </div>
           <div className="continent-items">
-            <img className={AfricaClass} onClick={() => {handleContinentSelect('Africa'); addClassToAfrica()}} src="/src/assets/africa.png" alt="" />
+            <img className={AfricaClass} onClick={() => {handleContinentSelect('Africa'); addClassToAfrica()}} src="/assets/africa.png" alt="" />
             <p>Africa</p>
           </div>
       </div>
