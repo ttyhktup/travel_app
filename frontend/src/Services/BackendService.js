@@ -27,3 +27,26 @@ export const sendTravelPreferences = async (preferences) => {
 export const getCachedCitiesArray = () => {
   return cachedCitiesArray;
 };
+
+let response_json = null;
+
+export const sendContinents = async (continents) => {
+  console.log("sending signal to backend", continents);
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(continents),
+  };
+
+  const response = await fetch(`${apiUrl}/continents`, requestOptions);
+
+  if (response.status !== 201) {
+    throw new Error("Unable to send list of continents");
+  }
+
+  const new_response = await response.json();
+  response_json = new_response;
+  return response_json;
+};

@@ -2,6 +2,7 @@
   import "./ContinentPage.css"
   import { usePreferences } from "../../context/preferences";
   import { useState } from "react";
+  import { sendContinents } from "../../Services/BackendService";
 
 
   export const ContinentPage = () => {
@@ -20,12 +21,6 @@
       })
     }
   };
-
-    const navigate = useNavigate();
-        const handleNextpage = () => {
-        console.log(preferences)
-        navigate('/Date');
-    }
     
     const [EuropeClass, setEuropeClass] = useState("continent-image-item")
     const [AsiaClass, setAsiaClass] = useState("continent-image-item")
@@ -51,6 +46,14 @@
     function addClassToAfrica() {
       setAfricaClass(prevClass => prevClass === "continent-image-item" ? "clicked" : "continent-image-item");
     }
+
+    const navigate = useNavigate();
+    const handleNextpage = () => {
+    console.log(preferences)
+    sendContinents(preferences["Continent"]);
+    console.log(preferences["Continent"])
+    navigate('/Date');
+  }
 
   return (
   <div className="continent-container">
