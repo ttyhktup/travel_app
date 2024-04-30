@@ -18,7 +18,7 @@
     const navigate = useNavigate();
         const handleNextpage = () => {
         console.log(preferences)
-        navigate('/date');
+        navigate('/Date');
     }
 
   return (
