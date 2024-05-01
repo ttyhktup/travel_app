@@ -44,7 +44,7 @@ const MapboxMap = (props) => {
         function spinGlobe() {
             const zoom = map.getZoom();
             if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-                let distancePerSecond = 360 / secondsPerRevolution;
+                let distancePerSecond = 1000 / secondsPerRevolution;
                 if (zoom > slowSpinZoom) {
                     // Slow spinning at higher zooms
                     const zoomDif =
