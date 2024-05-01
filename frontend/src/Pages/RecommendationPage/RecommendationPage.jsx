@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { getCachedCitiesArray } from "../../Services/BackendService";
+import { usePreferences } from "../../context/preferences";
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './RecommendationPage.css'
@@ -86,8 +86,11 @@ const MapboxMap = (props) => {
     };
 
 export const RecommendationPage = () => {
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [citiesArray, setCitiesArray] = useState(null);
+    const { preferences, setPreferences } = usePreferences();
+
+    console.log("RECOMMENDATIONS PREFERENCES:", preferences)
     const [index, setIndex] = useState(0);
     const [currentDict, setCurrentDict] = useState(null);
     const [city, setCity] = useState(null);
@@ -98,11 +101,12 @@ export const RecommendationPage = () => {
     const zoom = 2;
     
     useEffect(() => {
-        const interval = setInterval(async () => {
-            const cachedCities = await getCachedCitiesArray(); // Get cached cities array
+        const interval = setInterval(() => {
+            const cachedCities = preferences['recommendations']; // Get cached cities array
+            // console.log(cachedCities)
             if (cachedCities) {
                 setCitiesArray(cachedCities);
-                setLoading(false);
+                // setLoading(false);
                 clearInterval(interval); // Stop the interval when cities are fetched
                 setCurrentDict(cachedCities[index]);
                 setCity(Object.keys(currentDict)[0]);
