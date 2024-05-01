@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../../context/preferences";
-import { sendTravelPreferences } from "../../Services/BackendService";
 import "./WeatherPage.css"
 import { useState } from "react";
-import BounceLoader from "react-spinners/BounceLoader";
 
 export const WeatherPage = () => {
 const { preferences, setPreferences } = usePreferences();
@@ -25,48 +23,15 @@ if (!preferences.MaxTemp.includes(maxtemp)) {
 }
 };
 
-const [loading, setLoading] = useState(false);
-
 const navigate = useNavigate();
 
 console.log("PREFERENCES:", preferences)
 
 const handleNextpage = () => {
-  setLoading(true)
-  const getRecommendations = async (preferences) => {
-    const data = await sendTravelPreferences(preferences);
-    console.log("THIS IS FRONTEND RECEIVED DATA")
-    console.log(data)
-    if (!preferences.recommendations.includes(data)){
-
-      const newPreferences = {
-        ...preferences,
-        recommendations: [...preferences.recommendations, data]
-      }
-
-      setPreferences(newPreferences);
-      navigate('/Recommendations')
-    }
+  navigate('/Recommendations')
 }
-  getRecommendations(preferences)
-}
-
 
 return (
-  <div>
-    {
-      loading ? ( 
-        <div className="loader">   
-        <BounceLoader
-            color= {"#5bcfc2"}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-          <div><p className="wait">Good things come to those who wait...</p></div>
-        </div>
-      ) : (
   <div className="weather-container">
       <h4>3. What weather would you prefer?</h4>
       <label className="checkbox-container" onClick={() => handleWeatherSelect(30, 1000)}>
@@ -96,7 +61,5 @@ return (
       <button className="weather-button" onClick={handleNextpage}>Generate Result</button>
   </div>
 )
-}
-</div>
-)
+
 };

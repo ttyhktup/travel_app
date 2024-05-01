@@ -6,6 +6,7 @@ from lib.Location import *
 from flask import jsonify
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import random 
 
 # Create the Flask app
 app = Flask(__name__)
@@ -52,10 +53,15 @@ def receive_preferences():
         for country_name, cities in cities_by_country_dict.items():
             location = Location(country_name, cities)
             location.get_weather(min_temp, max_temp, start_date, end_date)
-            city_details = location.city_details
-            locations_lst.append(city_details)
+            if location.city_details == {}:
+                pass
+            else:
+                locations_lst.append(location.city_details)
+            
         print("THIS IS THE LOCATION LST")
         print(locations_lst)
+        
+        random.shuffle(locations_lst)
         return jsonify(locations_lst), 201
     
     except Exception as e:

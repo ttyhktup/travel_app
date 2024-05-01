@@ -1,0 +1,24 @@
+.map-container {
+  height: 600px; /* Example height */
+  width: 1000px;  /* Example width */
+  position: relative; /* Position can be absolute or relative based on your layout needs */
+  top: 5px; /* Adjust based on layout */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#fly {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #4cb7aa;
+}
+

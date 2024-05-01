@@ -59,3 +59,33 @@
 .weather-button:hover{
   background-color: #439d93;
 }
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  padding-top: 20%;
+}
+
+.wait{
+  margin-top: 25%;
+  font-style: italic;
+  color: gray;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  padding-top: 20%;
+}
+
+.wait{
+  margin-top: 25%;
+  font-style: italic;
+  color: gray;
+}

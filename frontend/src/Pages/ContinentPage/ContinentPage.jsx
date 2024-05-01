@@ -78,7 +78,7 @@
   <div>
     {
       loading ? ( 
-      <div className="loader">   
+      <div className="loader continent-container">   
       <BounceLoader
           color= {"#5bcfc2"}
           loading={loading}
