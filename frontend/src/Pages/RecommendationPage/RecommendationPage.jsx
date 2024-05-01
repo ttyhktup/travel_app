@@ -6,6 +6,8 @@ export const RecommendationPage = () => {
     const [citiesArray, setCitiesArray] = useState(null);
     const { preferences, setPreferences } = usePreferences();
 
+    console.log("RECOMMENDATIONS PREFERENCES:", preferences)
+
     useEffect(() => {
         const interval = setInterval(() => {
             const cachedCities = preferences['recommendations']; // Get cached cities array

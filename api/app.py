@@ -35,10 +35,8 @@ def receive_continents():
 def receive_preferences():
     try:
         data = request.get_json()
-        print(data)
         # Process the received data as needed
         cities_by_country_dict = data['citiesData'][0]
-        print(cities_by_country_dict)
         min_temp = data['MinTemp'][0]
         max_temp = data['MaxTemp'][0]
         start_date = datetime.strptime(data['startD'][0], '%Y-%m-%d') - relativedelta(years=1)
@@ -56,6 +54,8 @@ def receive_preferences():
             location.get_weather(min_temp, max_temp, start_date, end_date)
             city_details = location.city_details
             locations_lst.append(city_details)
+        print("THIS IS THE LOCATION LST")
+        print(locations_lst)
         return jsonify(locations_lst), 201
     
     except Exception as e:
@@ -63,5 +63,5 @@ def receive_preferences():
 
 
 # Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
