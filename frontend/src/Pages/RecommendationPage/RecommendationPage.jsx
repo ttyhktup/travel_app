@@ -15,18 +15,40 @@ const MapboxMap = (props) => {
     useEffect(() => {        
         const map = new mapboxgl.Map({
         container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
         projection: 'globe',
-        center: [props.longitude, props.latitude], // starting position [lng, lat]
+        center: [0, 0], // starting position [lng, lat]
         zoom: props.zoom // starting zoom
         });
+
+        var latitudeLongitudeList = props.latLong
+
+        var countLat = 1
+        var countLong = 0
         
-        map.flyTo({
+        const firstFlyDown = () => {
+            map.flyTo({
+                zoom: 11,
+                center: [latitudeLongitudeList[countLong], latitudeLongitudeList[countLat]],
+                essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+                duration: 8000
+                });
+                countLat=countLat+2
+                countLong=countLong+2
+        }
+        
+        firstFlyDown(countLat, countLong)
+        
+        document.getElementById('fly').addEventListener('click', () => {
+            map.flyTo({
             zoom: 11,
-            center: [props.longitude, props.latitude],
+            center: [latitudeLongitudeList[countLong], latitudeLongitudeList[countLat]],
             essential: true, // this animation is considered essential with respect to prefers-reduced-motion
             duration: 8000
         });
+        countLat=countLat+2
+        countLong=countLong+2
+        })
 
         // The following values can be changed to control rotation speed:
 
@@ -93,14 +115,16 @@ export const RecommendationPage = () => {
     const [currentDict, setCurrentDict] = useState(null);
     const [city, setCity] = useState(null);
     const [values, setValues] = useState(null);
+    const [latLong, setLatLong] = useState(null)
+
 
     const handleClick = () => {
         
         if (index < (dataReceived.length-1)) {
             setIndex(index+1)
-            setCurrentDict(dataReceived[index]);
-            setCity(Object.keys(dataReceived[index])[0]);
-            setValues(Object.values(dataReceived[index])[0]);
+            setCurrentDict(dataReceived[index+1]);
+            setCity(Object.keys(dataReceived[index+1])[0]);
+            setValues(Object.values(dataReceived[index+1])[0]);
         } else {
             setIndex(0)
             setCurrentDict(dataReceived[index]);
@@ -113,26 +137,38 @@ export const RecommendationPage = () => {
 
     useEffect(() => {
         const getRecommendations = async (preferences) => {
-        const data = await sendTravelPreferences(preferences);
+        console.log("I Have Been Fired")
+            if (!dataReceived) {
+            const data = await sendTravelPreferences(preferences);
         
-        if (!preferences.recommendations.includes(data)) {
-            setDataReceived(data)
-            setCurrentDict(data[index]);
-            setCity(Object.keys(data[index])[0]);
-            setValues(Object.values(data[index])[0]);
-
-            const newPreferences = {
-                ...preferences,
-                recommendations: [...preferences.recommendations, data]
+            if (!preferences.recommendations.includes(data)) {
+                setDataReceived(data);
+                setCurrentDict(data[index]);
+                setCity(Object.keys(data[index])[0]);
+                setValues(Object.values(data[index])[0]);
+                
+                var latitudeLongitudeList = []
+                for (var i = 0; i < data.length; i++) {
+                    for (var key in data[i]){
+                        latitudeLongitudeList.push(data[i][key][4])
+                        latitudeLongitudeList.push(data[i][key][3])
+                }
             }
-        
-            setPreferences(newPreferences)
-        }
-        
-        setLoading(false);
-    } 
+                setLatLong(latitudeLongitudeList)
+
+                const newPreferences = {
+                    ...preferences,
+                    recommendations: [...preferences.recommendations, data]
+                }
+                
+                setPreferences(newPreferences)
+            }
+            
+            setLoading(false);
+    }
+} 
     getRecommendations(preferences)
-    }, [])
+    }, [dataReceived])
     
     return (
     <div>
@@ -155,9 +191,9 @@ export const RecommendationPage = () => {
             <br></br>
             {!loading && currentDict && city && values && (
                 <>
-                <MapboxMap latitude={values[3]} longitude={values[4]} zoom={zoom}/> 
+                <MapboxMap latLong={latLong} zoom={zoom}/> 
                 <br></br>
-                <button id="fly" onClick={() => handleClick()}>Fly</button>
+                <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
                 <br></br>
                 <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                 </>
