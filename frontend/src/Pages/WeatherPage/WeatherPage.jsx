@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../../context/preferences";
-import { sendTravelPreferences } from "../../Services/BackendService";
 import "./WeatherPage.css"
 
 export const WeatherPage = () => {
@@ -23,30 +22,13 @@ if (!preferences.MaxTemp.includes(maxtemp)) {
 }
 };
 
-
 const navigate = useNavigate();
 
 console.log("PREFERENCES:", preferences)
 
 const handleNextpage = () => {
-  const getRecommendations = async (preferences) => {
-    const data = await sendTravelPreferences(preferences);
-    console.log("THIS IS FRONTEND RECEIVED DATA")
-    console.log(data)
-    if (!preferences.recommendations.includes(data)){
-
-      const newPreferences = {
-        ...preferences,
-        recommendations: [...preferences.recommendations, data]
-      }
-
-      setPreferences(newPreferences);
-      navigate('/Recommendations')
-    }
+    navigate('/Recommendations')
 }
-  getRecommendations(preferences)
-}
-
 
 return (
   <div className="weather-container">
