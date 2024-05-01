@@ -11,7 +11,6 @@ header{
   background-color: #5BD0C2;
   display: flex;
   align-items: center;
-  padding: 10px;
 }
 
 header a {
@@ -22,8 +21,8 @@ header a {
 header img{
   margin-right: 20px;
   margin-left: 10px;
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
 }
 
 body {
