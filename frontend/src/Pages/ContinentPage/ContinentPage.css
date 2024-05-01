@@ -1,3 +1,69 @@
+@media only screen and (max-width: 600px) {
+  .continent-images{
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+  }
+
+  .continent-items{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    color: rgb(72, 72, 72);
+  }
+
+  .continent-image-item{
+    width: 90px;
+    height: 90px;
+    opacity: 0.5;
+  }
+
+  .continent-image-item:hover{
+    opacity: 0.7;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  .clicked {
+    width: 95px;
+    height: 95px;
+    opacity: 0.7;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .continent-images{
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    text-align: center;
+  }
+  
+  .continent-items{
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    color: rgb(72, 72, 72);
+  }
+  
+  .continent-image-item{
+    width: 180px;
+    height: 180px;
+    opacity: 0.5;
+  }
+
+  .continent-image-item:hover{
+    width: 180px;
+    height: 180px;
+    opacity: 0.7;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .clicked {
+    width: 182px;
+    height: 182px;
+    opacity: 0.7;
+  }
+}
+
 .continent-container {
   display: flex;
   flex-direction: column;
@@ -7,10 +73,18 @@
 }
 
 .loader {
-  position: relative;
-  padding-top: 400px;
-  padding-left: 800px;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  padding-top: 20%;
+}
+
+.wait{
+  margin-top: 25%;
+  font-style: italic;
+  color: gray;
 }
 
 .continent-body{
@@ -29,38 +103,6 @@
 
 .continent-body p {
   margin-bottom: 50px;
-}
-
-.continent-images{
-  display: inline-grid;
-  grid-template-columns: auto auto auto;
-  text-align: center;
-}
-
-.continent-items{
-  margin-right: 50px;
-  margin-left: 50px;
-  margin-bottom: 20px;
-  color: rgb(72, 72, 72);
-}
-
-.continent-image-item{
-  width: 180px;
-  height: 180px;
-  opacity: 0.5;
-}
-
-.continent-image-item:hover{
-  width: 180px;
-  height: 180px;
-  opacity: 0.7;
-  transition: opacity 0.5s ease-out;
-}
-
-.clicked {
-  width: 182px;
-  height: 182px;
-  opacity: 0.7;
 }
 
 .continent-button {

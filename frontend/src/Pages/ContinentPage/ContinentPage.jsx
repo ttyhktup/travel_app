@@ -82,12 +82,13 @@
       <BounceLoader
           color= {"#5bcfc2"}
           loading={loading}
-          // cssOverride={override}
           size={100}
           aria-label="Loading Spinner"
           data-testid="loader"
         />
+        <div><p className="wait">Good things come to those who wait...</p></div>
       </div>
+      
       ) : (
     <div className="continent-container">
     <div className="continent-body">
