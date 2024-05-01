@@ -35,13 +35,13 @@ class Location():
         weather_data = response.json()['hourly'] 
         
         temp = weather_data['temperature_2m'] # Getting the weather data we want from the API - this will be a list of temps for the given period
-        print(temp)
         temp = statistics.mean(temp) // 1 
         
         # This API returns a list of temperatures and we want an average, the above code uses the statistics module to calculate the mean 
         # of these temperatures and then uses floor division by 1 to round it down to whole number
 
         if (minTemp >= temp) or (temp >= maxTemp): # checking if temp is outside our min temp max temp range 
+          print('here')
           pass
         else:
           hotel_link = self.get_hotel_link(city['name'], start_date, end_date)

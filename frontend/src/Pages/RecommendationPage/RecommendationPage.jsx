@@ -100,6 +100,7 @@ export const RecommendationPage = () => {
                 setCitiesArray(cachedCities);
                 setLoading(false);
                 clearInterval(interval); // Stop the interval when cities are fetched
+                console.log(citiesArray)
             }
         }, 1000); // Check every 1 second for cached cities
 
@@ -110,12 +111,12 @@ export const RecommendationPage = () => {
         <div className="Continent">
             <h3>YOUR RECOMMENDATIONS</h3>
             {loading && <p>Loading...</p>}
-            <MapboxMap latitude={latitude} longitude={longitude} zoom={zoom}/> 
             <br></br>
             <button id="fly">Fly</button>
-            <Location cityName="London" countryName="Britain" Temp="12" bookingLink="link"/>
             <br></br>
             {!loading && citiesArray && (
+                <>
+                <MapboxMap latitude={latitude} longitude={longitude} zoom={zoom}/> 
                 <div>
                     {citiesArray.map((continentData, index) => (
                         <div key={index}>
@@ -126,6 +127,7 @@ export const RecommendationPage = () => {
                         </div>
                     ))}   
                 </div>
+                </>
             )}
             {!loading && citiesArray === null && (
                 <p>No recommendations available.</p>

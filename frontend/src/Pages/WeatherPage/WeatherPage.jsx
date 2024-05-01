@@ -49,11 +49,11 @@ return (
             <input type="radio" name="option"/>
             I like cooler weather but not too cold (5°C - 14°C)
         </label>
-        <label className="checkbox-container" onClick={() => handleWeatherSelect(5, -1000)}>
+        <label className="checkbox-container" onClick={() => handleWeatherSelect(-1000, 5)}>
             <input type="radio" name="option"/>
             I prefer cold weather with snow and winter activities (below 5°C)
         </label>
-        <label className="checkbox-container" onClick={() => handleWeatherSelect(-1000, -1000)}>
+        <label className="checkbox-container" onClick={() => handleWeatherSelect(-1000, 1000)}>
             <input type="radio" name="option"/>
             I have no strong preference for weather.
         </label>
