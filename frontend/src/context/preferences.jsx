@@ -9,7 +9,9 @@ export const PreferencesProvider = ({ children }) => {
     MinTemp: [],
     MaxTemp: [],
     startD: [],
-    endD: []
+    endD: [],
+    citiesData: [],
+    recommendations: []
   });
 
   return (

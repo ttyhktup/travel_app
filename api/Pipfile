@@ -13,6 +13,7 @@ pandas = "*"
 amadeus = "*"
 pytest-mock = "*"
 pytest = "*"
+asyncio = "*"
 
 [dev-packages]
 
