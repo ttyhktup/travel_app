@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../../context/preferences";
 import "./WeatherPage.css"
+import { useState } from "react";
 
 export const WeatherPage = () => {
 const { preferences, setPreferences } = usePreferences();
@@ -27,7 +28,7 @@ const navigate = useNavigate();
 console.log("PREFERENCES:", preferences)
 
 const handleNextpage = () => {
-    navigate('/Recommendations')
+  navigate('/Recommendations')
 }
 
 return (
@@ -60,4 +61,5 @@ return (
       <button className="weather-button" onClick={handleNextpage}>Generate Result</button>
   </div>
 )
-}
+
+};

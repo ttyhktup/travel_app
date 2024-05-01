@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const apiUrl = 'http://localhost:8080';
+// const apiUrl = 'http://localhost:8080';
 
 export const sendTravelPreferences = async (preferences) => {
   console.log("sending signal to backend", preferences);

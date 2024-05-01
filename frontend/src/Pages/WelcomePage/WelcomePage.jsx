@@ -20,21 +20,16 @@ export const WelcomePage = () => {
     <div className="welcome-container">
 
       <div className="welcome-info">
-        {/* <div className="welcome-logo">
-          <img src="/src/assets/plane.png" alt="" />
-        </div> */}
-        
         <div className="welcome-content">
-          <h1>Welcome to FuryRoam!</h1>
-          <p>We simplify your travel decisions 
+          <div><h1>Welcome to FuryRoam!</h1></div>
+          <div><p>We simplify your travel decisions 
           with personalised recommendations.
-          Explore at the speed of thought, with our travel app.</p>
+          Explore at the speed of thought with our travel app.</p></div>
           <button className="welcome-button" onClick={handleStartQuiz}>Start Quiz</button>
         </div>
       </div>
 
       <div className="welcome-image">
-        {/* <div className="welcome-page-image"></div> */}
       </div>
       
     </div>

@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
+import BounceLoader from "react-spinners/BounceLoader";
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -134,6 +135,20 @@ export const RecommendationPage = () => {
     }, [])
     
     return (
+    <div>
+        { loading ? (
+            <div className="loader">   
+            <BounceLoader
+                color= {"#5bcfc2"}
+                loading={loading}
+                size={100}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            <div><p className="wait">Good things come to those who wait...</p></div>
+            </div>
+        ) : 
+        ( 
         <div className="Continent">
             <h3>YOUR RECOMMENDATIONS</h3>
             {loading && <p>Loading...</p>}
@@ -151,6 +166,10 @@ export const RecommendationPage = () => {
                 <p>No recommendations available.</p>
             )}
         </div>
+        )
+        
+        }
+    </div>
     );
 };
 
