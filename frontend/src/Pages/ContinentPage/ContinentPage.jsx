@@ -78,15 +78,17 @@
   <div>
     {
       loading ? ( 
-      <div className="loader continent-container">   
-      <BounceLoader
-          color= {"#5bcfc2"}
-          loading={loading}
-          size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-        <div><p className="wait">Good things come to those who wait...</p></div>
+      <div className="continent-container"> 
+        <div className="loader continent-body">
+          <BounceLoader
+                color= {"#5bcfc2"}
+                loading={loading}
+                size={100}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+          <div><p className="wait">Good things come to those who wait...</p></div>
+        </div>  
       </div>
       
       ) : (

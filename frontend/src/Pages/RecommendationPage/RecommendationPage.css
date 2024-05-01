@@ -22,3 +22,16 @@
     background: #4cb7aa;
 }
 
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+}
+
+.wait{
+  margin-top: 25%;
+  font-style: italic;
+  color: gray;
+}
