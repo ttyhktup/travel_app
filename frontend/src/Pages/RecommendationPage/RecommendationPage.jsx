@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './RecommendationPage.css'
 import { Location } from '../../components/Location';
+import { sendTravelPreferences } from '../../Services/BackendService';
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -19,15 +20,12 @@ const MapboxMap = (props) => {
         zoom: props.zoom // starting zoom
         });
         
-        document.getElementById('fly').addEventListener('click', () => {
-            // Fly to a random location
-            map.flyTo({
-                zoom: 9,
-                center: [2.3514, 48.8575],
-                essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
+        map.flyTo({
+            zoom: 11,
+            center: [props.longitude, props.latitude],
+            essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+            duration: 8000
         });
-
 
         // The following values can be changed to control rotation speed:
 
@@ -86,54 +84,70 @@ const MapboxMap = (props) => {
     };
 
 export const RecommendationPage = () => {
-    // const [loading, setLoading] = useState(true);
-    const [citiesArray, setCitiesArray] = useState(null);
+    
+    const [loading, setLoading] = useState(true);
     const { preferences, setPreferences } = usePreferences();
-
-    console.log("RECOMMENDATIONS PREFERENCES:", preferences)
     const [index, setIndex] = useState(0);
+    const [dataReceived, setDataReceived] = useState(null)
     const [currentDict, setCurrentDict] = useState(null);
     const [city, setCity] = useState(null);
     const [values, setValues] = useState(null);
-    
-    const longitude = 1.145
-    const latitude = 53.68;
-    const zoom = 2;
-    
+
+    const handleClick = () => {
+        
+        if (index < (dataReceived.length-1)) {
+            setIndex(index+1)
+            setCurrentDict(dataReceived[index]);
+            setCity(Object.keys(dataReceived[index])[0]);
+            setValues(Object.values(dataReceived[index])[0]);
+        } else {
+            setIndex(0)
+            setCurrentDict(dataReceived[index]);
+            setCity(Object.keys(dataReceived[index])[0]);
+            setValues(Object.values(dataReceived[index])[0]);
+        }
+    }
+
+    const zoom = 1;
+
     useEffect(() => {
-        const interval = setInterval(() => {
-            const cachedCities = preferences['recommendations']; // Get cached cities array
-            // console.log(cachedCities)
-            if (cachedCities) {
-                setCitiesArray(cachedCities);
-                // setLoading(false);
-                clearInterval(interval); // Stop the interval when cities are fetched
-                setCurrentDict(cachedCities[index]);
-                setCity(Object.keys(currentDict)[0]);
-                setValues(currentDict[city]);
+        const getRecommendations = async (preferences) => {
+        const data = await sendTravelPreferences(preferences);
+        
+        if (!preferences.recommendations.includes(data)) {
+            setDataReceived(data)
+            setCurrentDict(data[index]);
+            setCity(Object.keys(data[index])[0]);
+            setValues(Object.values(data[index])[0]);
+
+            const newPreferences = {
+                ...preferences,
+                recommendations: [...preferences.recommendations, data]
             }
-        }, 1000); // Check every 1 second for cached cities
-
-        return () => clearInterval(interval); // Cleanup on unmount
-    }, []);
+        
+            setPreferences(newPreferences)
+        }
+        
+        setLoading(false);
+    } 
+    getRecommendations(preferences)
+    }, [])
     
-
-
     return (
         <div className="Continent">
             <h3>YOUR RECOMMENDATIONS</h3>
             {loading && <p>Loading...</p>}
             <br></br>
-            <button id="fly">Fly</button>
-            <br></br>
-            {!loading && citiesArray && (
+            {!loading && currentDict && city && values && (
                 <>
-                <MapboxMap latitude={latitude} longitude={longitude} zoom={zoom}/> 
-                {console.log(citiesArray.keys())}
+                <MapboxMap latitude={values[3]} longitude={values[4]} zoom={zoom}/> 
+                <br></br>
+                <button id="fly" onClick={() => handleClick()}>Fly</button>
+                <br></br>
                 <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                 </>
             )}
-            {!loading && citiesArray === null && (
+            {!loading && currentDict === null && (
                 <p>No recommendations available.</p>
             )}
         </div>

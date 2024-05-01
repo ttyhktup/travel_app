@@ -38,7 +38,6 @@ class Location():
         # This API returns a list of temperatures and we want an average, the above code uses the statistics msodule to calculate the mean 
         # of these temperatures and then uses floor division by 1 to round it down to whole number
         if (minTemp >= temp) or (temp >= maxTemp): # checking if temp is outside our min temp max temp range 
-          print('here')
           pass
         else:
           hotel_link = self.get_hotel_link(city['name'], start_date, end_date)
