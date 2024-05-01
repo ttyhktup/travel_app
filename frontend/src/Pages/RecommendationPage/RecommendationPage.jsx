@@ -88,24 +88,32 @@ const MapboxMap = (props) => {
 export const RecommendationPage = () => {
     const [loading, setLoading] = useState(true);
     const [citiesArray, setCitiesArray] = useState(null);
+    const [index, setIndex] = useState(0);
+    const [currentDict, setCurrentDict] = useState(null);
+    const [city, setCity] = useState(null);
+    const [values, setValues] = useState(null);
     
     const longitude = 1.145
     const latitude = 53.68;
     const zoom = 2;
     
     useEffect(() => {
-        const interval = setInterval(() => {
-            const cachedCities = getCachedCitiesArray(); // Get cached cities array
+        const interval = setInterval(async () => {
+            const cachedCities = await getCachedCitiesArray(); // Get cached cities array
             if (cachedCities) {
                 setCitiesArray(cachedCities);
                 setLoading(false);
                 clearInterval(interval); // Stop the interval when cities are fetched
-                console.log(citiesArray)
+                setCurrentDict(cachedCities[index]);
+                setCity(Object.keys(currentDict)[0]);
+                setValues(currentDict[city]);
             }
         }, 1000); // Check every 1 second for cached cities
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
+    
+
 
     return (
         <div className="Continent">
@@ -117,16 +125,8 @@ export const RecommendationPage = () => {
             {!loading && citiesArray && (
                 <>
                 <MapboxMap latitude={latitude} longitude={longitude} zoom={zoom}/> 
-                <div>
-                    {citiesArray.map((continentData, index) => (
-                        <div key={index}>
-                            {Object.keys(continentData).map(city => (
-                                <Location key={city} cityName={city} countryName={continentData[city][0]} Temp={continentData[city][1]} bookingLink={continentData[city][2]}/>
-                                
-                            ))}
-                        </div>
-                    ))}   
-                </div>
+                {console.log(citiesArray.keys())}
+                <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                 </>
             )}
             {!loading && citiesArray === null && (
