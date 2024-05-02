@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePreferences } from "../../context/preferences";
+import "./ApiRedirect.css"
 
 const ApiRedirectModel = () => {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ const ApiRedirectModel = () => {
   return (
     <div className="model-API">
       <div className="model-content-API">
-        <p>Sorry something went wrong, please start again
+        <p>Oopsie daisy! <br /> Looks like your selection vanished into thin air. Give it another go, and let's hope the universe decides to cooperate this time.
         </p>
-        <button onClick={handleNextPage}>Start Again</button>
+        <button className='model-button-API' onClick={handleNextPage}>Start Again</button>
       </div>
     </div>
   );
