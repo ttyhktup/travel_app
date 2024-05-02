@@ -172,6 +172,7 @@ export const RecommendationPage = () => {
     return (
     <div>
         { loading ? (
+            <div className='loader-container'>
             <div className="loader">   
             <BounceLoader
                 color= {"#5bcfc2"}
@@ -182,18 +183,16 @@ export const RecommendationPage = () => {
             />
             <div><p className="wait">Good things come to those who wait...</p></div>
             </div>
+            </div>
         ) : 
         ( 
-        <div className="Continent">
+        <div className="recommendations-container">
             <h3>YOUR RECOMMENDATIONS</h3>
             {loading && <p>Loading...</p>}
-            <br></br>
             {!loading && currentDict && city && values && (
                 <>
                 <MapboxMap latLong={latLong} zoom={zoom}/> 
-                <br></br>
                 <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
-                <br></br>
                 <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                 </>
             )}
