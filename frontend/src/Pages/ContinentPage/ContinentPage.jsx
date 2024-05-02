@@ -51,28 +51,26 @@
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
-    const handleNextpage = () => {
-    setLoading(true)
-    let continents = []
-    continents = preferences.Continent
-    console.log(continents)
-    const getContinents = async (continents) => {
-      const data = await sendContinents(continents);
-      
-      if (!preferences.citiesData.includes(data)){
-        setPreferences((prevPreferences) => ({
+    const handleNextpage = async () => {
+      setLoading(true);
+      const continents = preferences.Continent;
+  
+      try {
+        const data = await sendContinents(continents);
+  
+        if (!preferences.citiesData.includes(data)) {
+          setPreferences((prevPreferences) => ({
             ...prevPreferences,
-            citiesData: [...prevPreferences.citiesData, data]
-        }));
-
-    }
-    
-    navigate('/Date');
-      return data
-    }
-    const data = getContinents(continents)
-    console.log(data)
-  }
+            citiesData: [...prevPreferences.citiesData, data],
+          }));
+        }
+  
+        navigate('/Date');
+      } catch (error) {
+        // Handle error and redirect to ApiRedirectModel
+        navigate('/ApiRedirect');
+      }
+    };
 
   return (
   <div>

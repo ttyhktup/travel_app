@@ -9,6 +9,7 @@ import { WelcomePage } from './Pages/WelcomePage/WelcomePage'
 import { ContinentPage } from './Pages/ContinentPage/ContinentPage';
 import { WeatherPage } from './Pages/WeatherPage/WeatherPage';
 import { RecommendationPage } from './Pages/RecommendationPage/RecommendationPage';
+import ApiRedirectModel from './Pages/ApiRedirect/ApiRedirect';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,13 @@ const router = createBrowserRouter([
   {
     path: "/Recommendations",
     element: <RecommendationPage/>
+  },
+  
+  {
+    path: "/ApiRedirect",
+    element: <ApiRedirectModel/>
   }
+
 ])
 
 
