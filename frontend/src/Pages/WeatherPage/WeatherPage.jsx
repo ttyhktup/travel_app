@@ -1,25 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../../context/preferences";
 import "./WeatherPage.css"
-import { useState } from "react";
 
 export const WeatherPage = () => {
 const { preferences, setPreferences } = usePreferences();
 const handleWeatherSelect = (mintemp, maxtemp) => {
 
 if (!preferences.MinTemp.includes(mintemp)) {
-  setPreferences((prevPreferences) => ({
-      ...prevPreferences,
-      MinTemp: [...prevPreferences.MinTemp, mintemp]
-  }));
+setPreferences((prevPreferences) => ({
+    ...prevPreferences,
+    MinTemp: [...prevPreferences.MinTemp, mintemp]
+}));
 }
 
 // Check if the max temp is already selected; if not, add it to the array
 if (!preferences.MaxTemp.includes(maxtemp)) {
-  setPreferences((prevPreferences) => ({
-      ...prevPreferences,
-      MaxTemp: [...prevPreferences.MaxTemp, maxtemp]
-  }));
+setPreferences((prevPreferences) => ({
+    ...prevPreferences,
+    MaxTemp: [...prevPreferences.MaxTemp, maxtemp]
+}));
 }
 };
 
@@ -28,7 +27,7 @@ const navigate = useNavigate();
 console.log("PREFERENCES:", preferences)
 
 const handleNextpage = () => {
-  navigate('/Recommendations')
+navigate('/Recommendations')
 }
 
 return (
