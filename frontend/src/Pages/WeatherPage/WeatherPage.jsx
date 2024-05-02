@@ -33,7 +33,7 @@ const handleNextpage = () => {
 
 return (
 <div className="weather-container">
-    <h4>3. What weather would you prefer?</h4>
+    <h4>What weather would you prefer?</h4>
     <label className="checkbox-container" onClick={() => handleWeatherSelect(30, 1000)}>
         <input type="radio" name="option"/>
         I prefer hot weather (above 30°C)

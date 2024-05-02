@@ -4,9 +4,13 @@ import "./WelcomePage.css"
 
 export const WelcomePage = () => {
   const [preferences, setPreferences] = useState({
-    continent: [],
-    minTemp: [],
-    maxTemp: [],
+    Continent: [],
+    MinTemp: [],
+    MaxTemp: [],
+    startD: [],
+    endD: [],
+    citiesData: [],
+    recommendations: []
   });
 
   const navigate = useNavigate();

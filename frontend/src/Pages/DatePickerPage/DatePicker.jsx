@@ -56,7 +56,7 @@ const handleNextpage = () => {
 return (
     <div className="date-container">
         <div className="date-picker-container">
-        <h4>2. Select a Date</h4>
+        <h4>Select a Date</h4>
             <DatePicker
                 startDate={startDate}
                 endDate={endDate}

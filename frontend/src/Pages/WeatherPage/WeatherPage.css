@@ -8,6 +8,8 @@
     padding: 10px;
   }
   .checkbox-container {
+    background-color: white;
+    opacity: 0.8;
     height: 60px;
     width: 80%;
     border: 1px solid rgb(158, 158, 158);
@@ -31,6 +33,8 @@
   }
   
   .checkbox-container {
+    background-color: white;
+    opacity: 0.8;
     height: 60px;
     width: 60%;
     border: 1px solid rgb(158, 158, 158);
@@ -40,6 +44,35 @@
     align-items: center;
     color: rgb(84, 84, 84);
   }
+  .checkbox-container:hover {
+    opacity: 0.9;
+  }
+}
+
+
+.weather-container::after{
+  content: "";
+  background: url("/assets/background-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.weather-container h4 {
+  width: 30%;
+  text-align: center;
+  padding: 7px;
+  border-radius: 5px;
+  opacity: 0.8;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
 }
 
 .checkbox-container input {
@@ -47,11 +80,11 @@
 }
 
 .weather-button {
+  border: 0.9px solid #30887c;
   height: 40px;
   width: 130px;
   background-color: #4cb7aa;
   color: white;
-  border: none;
   border-radius: 10px;
   font-weight: bold;
   margin-top: 30px;

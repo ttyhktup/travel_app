@@ -94,7 +94,7 @@
       ) : (
     <div className="continent-container">
     <div className="continent-body">
-        <h4>1. Which continent would you like to visit?</h4>
+        <h4>Which continent would you like to visit?</h4>
         <p>If you don't have a specific preference click next without selecting a continent.</p>
         <div className="continent-images">
             <div className="continent-items">
