@@ -108,31 +108,37 @@ return <div id="map" className="map-container" />;
 };
 
 export const RecommendationPage = () => {
-
-const [loading, setLoading] = useState(true);
-const { preferences, setPreferences } = usePreferences();
-const [index, setIndex] = useState(0);
-const [dataReceived, setDataReceived] = useState(null)
-const [currentDict, setCurrentDict] = useState(null);
-const [city, setCity] = useState(null);
-const [values, setValues] = useState(null);
-const [latLong, setLatLong] = useState(null)
-
-
-const handleClick = () => {
     
-    if (index < (dataReceived.length-1)) {
-        setIndex(index+1)
-        setCurrentDict(dataReceived[index+1]);
-        setCity(Object.keys(dataReceived[index+1])[0]);
-        setValues(Object.values(dataReceived[index+1])[0]);
-    } else {
-        setIndex(0)
-        setCurrentDict(dataReceived[index]);
-        setCity(Object.keys(dataReceived[index])[0]);
-        setValues(Object.values(dataReceived[index])[0]);
-    }
-}
+    const [loading, setLoading] = useState(true);
+    const { preferences, setPreferences } = usePreferences();
+    const [index, setIndex] = useState(0);
+    const [dataReceived, setDataReceived] = useState(null)
+    const [currentDict, setCurrentDict] = useState(null);
+    const [city, setCity] = useState(null);
+    const [values, setValues] = useState(null);
+    const [latLong, setLatLong] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
+
+
+    const handleClick = () => {
+        if (dataReceived.length === 1) {
+            setErrorMessage("No more recommendations available.");
+            return;
+        }
+    
+        if (index < (dataReceived.length - 1)) {
+            setIndex(index + 1);
+            setCurrentDict(dataReceived[index + 1]);
+            setCity(Object.keys(dataReceived[index + 1])[0]);
+            setValues(Object.values(dataReceived[index + 1])[0]);
+        } else {
+            setIndex(0);
+            setCurrentDict(dataReceived[index]);
+            setCity(Object.keys(dataReceived[index])[0]);
+            setValues(Object.values(dataReceived[index])[0]);
+        }
+        setErrorMessage(null); // Reset error message
+    };
 
 const zoom = 1;
 
@@ -165,6 +171,12 @@ const zoom = 1;
                     }
                 }
                 setLatLong(latitudeLongitudeList)
+
+                if (latitudeLongitudeList.length === 1) {
+                    setErrorMessage("Only one country available."); // Set error message
+                } else {
+                    setErrorMessage(null); // Reset error message if there are multiple countries
+                }
 
                 const newPreferences = {
                     ...preferences,
@@ -219,9 +231,9 @@ const zoom = 1;
                     </div>
                 </div>
             )}
-                {!loading && currentDict === null && (
-                    <NoRecommendationsModel />
-                )}
+            {!loading && currentDict === null && (
+                <NoRecommendationsModel />
+            )}
             </div>
             )
         
