@@ -8,7 +8,6 @@ import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
 import NoRecommendationsModel from '../../components/NoRecommendation';
-import axios from 'axios'
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
