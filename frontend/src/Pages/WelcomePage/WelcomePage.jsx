@@ -1,17 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import "./WelcomePage.css"
+import { usePreferences } from "../../context/preferences";
 
 export const WelcomePage = () => {
-  const [preferences, setPreferences] = useState({
-    Continent: [],
-    MinTemp: [],
-    MaxTemp: [],
-    startD: [],
-    endD: [],
-    citiesData: [],
-    recommendations: []
-  });
+  const { preferences, setPreferences } = usePreferences()
 
   const navigate = useNavigate();
 

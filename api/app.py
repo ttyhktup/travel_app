@@ -38,8 +38,8 @@ def receive_preferences():
         data = request.get_json()
         # Process the received data as needed
         cities_by_country_dict = data['citiesData'][0]
-        min_temp = data['MinTemp'][0]
-        max_temp = data['MaxTemp'][0]
+        min_temp = data['minTemp'][0]
+        max_temp = data['maxTemp'][0]
         start_date = datetime.strptime(data['startD'][0], '%Y-%m-%d') - relativedelta(years=1)
         end_date = datetime.strptime(data['endD'][0], '%Y-%m-%d') - relativedelta(years=1)
         # ^ Creating datetime objects from dates passed in and minusing a year from them ^

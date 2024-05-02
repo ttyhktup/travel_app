@@ -1,10 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePreferences } from "../../context/preferences";
 
 const ApiRedirectModel = () => {
   const navigate = useNavigate();
-
+  const { preferences, setPreferences } = usePreferences()
+  
   const handleNextPage = () => {
+
+  setPreferences({
+    Continent: [],
+    minTemp: [],
+    maxTemp: [],
+    startD: [],
+    endD: [],
+    citiesData: [],
+    recommendations: []
+})
+    
+    
     navigate('/');
   };
 

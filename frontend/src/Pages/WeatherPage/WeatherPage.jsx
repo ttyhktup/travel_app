@@ -6,20 +6,19 @@ export const WeatherPage = () => {
 const { preferences, setPreferences } = usePreferences();
 const handleWeatherSelect = (mintemp, maxtemp) => {
 
-if (!preferences.MinTemp.includes(mintemp)) {
-setPreferences((prevPreferences) => ({
-    ...prevPreferences,
-    MinTemp: [...prevPreferences.MinTemp, mintemp]
-}));
+if (!preferences.minTemp.includes(mintemp) && !preferences.maxTemp.includes(maxtemp)) {
+    setPreferences({
+        Continent: preferences.Continent,
+        minTemp: [mintemp],
+        maxTemp: [maxtemp],
+        startD: preferences.startD,
+        endD: preferences.endD,
+        citiesData: preferences.citiesData,
+        recommendations: []
+    });
 }
 
-// Check if the max temp is already selected; if not, add it to the array
-if (!preferences.MaxTemp.includes(maxtemp)) {
-setPreferences((prevPreferences) => ({
-    ...prevPreferences,
-    MaxTemp: [...prevPreferences.MaxTemp, maxtemp]
-}));
-}
+
 };
 
 const navigate = useNavigate();
