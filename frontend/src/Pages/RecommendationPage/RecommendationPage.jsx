@@ -117,22 +117,28 @@ export const RecommendationPage = () => {
     const [city, setCity] = useState(null);
     const [values, setValues] = useState(null);
     const [latLong, setLatLong] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
 
 
     const handleClick = () => {
-        
-        if (index < (dataReceived.length-1)) {
-            setIndex(index+1)
-            setCurrentDict(dataReceived[index+1]);
-            setCity(Object.keys(dataReceived[index+1])[0]);
-            setValues(Object.values(dataReceived[index+1])[0]);
+        if (dataReceived.length === 1) {
+            setErrorMessage("No more recommendations available.");
+            return;
+        }
+    
+        if (index < (dataReceived.length - 1)) {
+            setIndex(index + 1);
+            setCurrentDict(dataReceived[index + 1]);
+            setCity(Object.keys(dataReceived[index + 1])[0]);
+            setValues(Object.values(dataReceived[index + 1])[0]);
         } else {
-            setIndex(0)
+            setIndex(0);
             setCurrentDict(dataReceived[index]);
             setCity(Object.keys(dataReceived[index])[0]);
             setValues(Object.values(dataReceived[index])[0]);
         }
-    }
+        setErrorMessage(null); // Reset error message
+    };
 
     const zoom = 1;
 
@@ -165,6 +171,12 @@ export const RecommendationPage = () => {
                     }
                 }
                 setLatLong(latitudeLongitudeList)
+
+                if (latitudeLongitudeList.length === 1) {
+                    setErrorMessage("Only one country available."); // Set error message
+                } else {
+                    setErrorMessage(null); // Reset error message if there are multiple countries
+                }
 
                 const newPreferences = {
                     ...preferences,
@@ -214,7 +226,12 @@ export const RecommendationPage = () => {
                     <>
                     <MapboxMap latLong={latLong} zoom={zoom}/> 
                     <br></br>
-                    <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
+                    {errorMessage && (
+    <p className="error-message">{errorMessage}</p>
+)}
+<button id="fly" onClick={() => handleClick()}>
+    Next Recommendation
+</button>
                     <br></br>
                     <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                     </>
