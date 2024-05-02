@@ -189,15 +189,15 @@ return (
     <div className="recommendations-container">
         <h3>YOUR RECOMMENDATIONS</h3>
         {currentDict && city && values && (
-          <div className="recommendation">
+            <div className="recommendation">
             <div className='recommendation-location'> 
-              <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
+                <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
             </div>
             <div className='recommendation-map'>
-              <MapboxMap latLong={latLong} zoom={zoom}/> 
-              <button className='recommendation-button' id="fly" onClick={() => handleClick()}>Next Recommendation</button>
+                <MapboxMap latLong={latLong} zoom={zoom}/> 
+                <button className='recommendation-button' id="fly" onClick={() => handleClick()}>Next Recommendation</button>
             </div>
-          </div>
+            </div>
         )}
         {currentDict === null && (
             <p>No recommendations available.</p>
