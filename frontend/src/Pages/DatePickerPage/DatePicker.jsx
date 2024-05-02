@@ -55,17 +55,17 @@ const handleNextpage = () => {
 
 return (
     <div className="date-container">
-      <h4>2. Select a Date</h4>
-      <div className="date-picker-container">
-        <DatePicker
-            startDate={startDate}
-            endDate={endDate}
-            onChange={onChange}
-            selectsRange
-            inline
-        />
-      </div>
-      <button className="date-button" onClick={handleNextpage}>Next step</button>
+        <div className="date-picker-container">
+        <h4>Select a Date</h4>
+            <DatePicker
+                startDate={startDate}
+                endDate={endDate}
+                onChange={onChange}
+                selectsRange
+                inline
+            />
+        <button className="date-button" onClick={handleNextpage}>Next step</button>
+        </div>
     </div>
 );
 }

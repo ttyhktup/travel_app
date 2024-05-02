@@ -15,18 +15,18 @@
   .continent-image-item{
     width: 90px;
     height: 90px;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   .continent-image-item:hover{
-    opacity: 0.7;
+    opacity: 0.9;
     transition: opacity 0.5s ease-out;
   }
   
   .clicked {
     width: 95px;
     height: 95px;
-    opacity: 0.7;
+    opacity: 0.9;
   }
 }
 
@@ -47,20 +47,20 @@
   .continent-image-item{
     width: 180px;
     height: 180px;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   .continent-image-item:hover{
     width: 180px;
     height: 180px;
-    opacity: 0.7;
+    opacity: 0.9;
     transition: opacity 0.5s ease-out;
   }
 
   .clicked {
     width: 182px;
     height: 182px;
-    opacity: 0.7;
+    opacity: 0.9;
   }
 }
 
@@ -68,15 +68,19 @@
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  min-height: 70vh;
+  min-height: 100vh;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 
 .continent-container::after{
   content: "";
-  background: url("/assets/background.jpg");
-  opacity: 0.9;
+  background: url("/assets/background-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -84,29 +88,32 @@
   position: absolute;
   z-index: -1;
 }
+
 .loader {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   align-self: center;
-  padding-top: 20%;
 }
 
 .wait{
   margin-top: 25%;
   font-style: italic;
-  color: gray;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
 }
 
 .continent-body{
+  background-color: white;
+  margin: 5%;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 5%;
+  padding: 3%;
+  border-radius: 3%;
+  opacity: 0.8;
 }
 
 .continent-body h4{

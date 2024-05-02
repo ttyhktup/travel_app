@@ -78,21 +78,23 @@
   <div>
     {
       loading ? ( 
-      <div className="loader continent-container">   
-      <BounceLoader
-          color= {"#5bcfc2"}
-          loading={loading}
-          size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-        <div><p className="wait">Good things come to those who wait...</p></div>
+      <div className="continent-container"> 
+        <div className="loader continent-body">
+          <BounceLoader
+                color= {"#5bcfc2"}
+                loading={loading}
+                size={100}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+          <div><p className="wait">Good things come to those who wait...</p></div>
+        </div>  
       </div>
       
       ) : (
     <div className="continent-container">
     <div className="continent-body">
-        <h4>1. Which continent would you like to visit?</h4>
+        <h4>Which continent would you like to visit?</h4>
         <p>If you don't have a specific preference click next without selecting a continent.</p>
         <div className="continent-images">
             <div className="continent-items">

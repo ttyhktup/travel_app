@@ -1,14 +1,39 @@
 .date-container {
-  min-width: 320px;
-  min-height: 70vh;
   display: flex;
   flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
   align-items: center;
-  padding: 5%;
+  justify-content: center;
+  position: relative;
+}
+
+.date-container::after{
+  content: "";
+  background: url("/assets/background-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .date-picker-container {
-  margin-top: 30px;
+  background-color: white;
+  width: 40%;
+  margin: 5%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 3%;
+  border-radius: 3%;
+  opacity: 0.8;
 }
 
 .react-datepicker{
