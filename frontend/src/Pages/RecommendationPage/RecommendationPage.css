@@ -6,17 +6,52 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  background-color: rgb(236, 236, 236);
+  color: rgb(60, 60, 60);
+}
+
+.recommendation{
+  border-radius: 5%;
+  background-color: #fff;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+
+.recommendation-location{
+  padding: 3%;
+}
+
+.recommendation-map{
+  padding: 3%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .map-container {
-  height: 600px; /* Example height */
-  width: 1000px;  /* Example width */
+  width: 100%;
+  height: 30em;
   position: relative; /* Position can be absolute or relative based on your layout needs */
   top: 5px; /* Adjust based on layout */
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin: 3%;
 }
+
+.mapboxgl-canvas{
+  align-self: center;
+  width: 90%;
+  height: 100%;
+}
+
+.recommendation-button{
+  height: 10%;
+  width: 8%;
+}
+
 #fly {
     display: block;
     position: relative;
@@ -73,4 +108,8 @@
   margin-top: 25%;
   font-style: italic;
   color: gray;
+}
+
+.recommendation-body{
+  
 }
