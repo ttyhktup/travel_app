@@ -7,6 +7,7 @@ import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
+import NoRecommendationsModel from '../../components/NoRecommendation';
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -139,7 +140,16 @@ export const RecommendationPage = () => {
         const getRecommendations = async (preferences) => {
             if (!dataReceived) {
             const data = await sendTravelPreferences(preferences);
+            console.log("data here", data);
+
+            if (Array.isArray(data) && data.length === 0) {
+                // Render the "No Recommendations available" HTML
+                setLoading(false);
+                return; // Exit the function
+            }
         
+            
+            
             if (!preferences.recommendations.includes(data)) {
                 setDataReceived(data);
                 setCurrentDict(data[index]);
@@ -184,24 +194,24 @@ export const RecommendationPage = () => {
             </div>
         ) : 
         ( 
-        <div className="Continent">
-            <h3>YOUR RECOMMENDATIONS</h3>
-            {loading && <p>Loading...</p>}
-            <br></br>
-            {!loading && currentDict && city && values && (
-                <>
-                <MapboxMap latLong={latLong} zoom={zoom}/> 
+            <div className="Continent">
+                <h3>YOUR RECOMMENDATIONS</h3>
+                {loading && <p>Loading...</p>}
                 <br></br>
-                <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
-                <br></br>
-                <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
-                </>
-            )}
-            {!loading && currentDict === null && (
-                <p>No recommendations available.</p>
-            )}
-        </div>
-        )
+                {!loading && currentDict && city && values && (
+                    <>
+                    <MapboxMap latLong={latLong} zoom={zoom}/> 
+                    <br></br>
+                    <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
+                    <br></br>
+                    <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
+                    </>
+                )}
+                {!loading && currentDict === null && (
+                    <NoRecommendationsModel />
+                )}
+            </div>
+            )
         
         }
     </div>
