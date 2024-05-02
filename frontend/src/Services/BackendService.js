@@ -25,7 +25,8 @@ export const sendTravelPreferences = async (preferences, options = {}) => {
 };
 
 
-export const sendContinents = async (continents) => {
+export const sendContinents = async (continents, options = {}) => {
+  const { signal } = options;
   console.log("sending signal to backend", continents);
   const requestOptions = {
     method: "POST",
@@ -33,6 +34,7 @@ export const sendContinents = async (continents) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(continents),
+    signal: signal
   };
 
   const response = await fetch(`${BACKEND_URL}/continents`, requestOptions);

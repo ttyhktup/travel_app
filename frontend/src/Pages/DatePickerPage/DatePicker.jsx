@@ -35,9 +35,13 @@ const onChange = (dates) => {
 const handleDateSelect = (start, end) => {
     if (!preferences.startD.includes(start) || !preferences.endD.includes(end)) {
         setPreferences({
-            ...preferences,
-            startD: [...preferences.startD, start],
-            endD: [...preferences.endD, end]
+            Continent: preferences.Continent,
+            minTemp: [],
+            maxTemp: [],
+            startD: [start],
+            endD: [end],
+            citiesData: preferences.citiesData,
+            recommendations: []
         });
     }
     console.log(preferences)

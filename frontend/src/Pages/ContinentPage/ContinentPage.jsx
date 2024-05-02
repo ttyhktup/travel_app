@@ -1,14 +1,14 @@
   import { useNavigate } from "react-router-dom";
   import "./ContinentPage.css"
   import { usePreferences } from "../../context/preferences";
-  import { useState } from "react";
+  import { useState, useEffect } from "react";
   import { sendContinents } from "../../Services/BackendService";
   import BounceLoader from "react-spinners/BounceLoader";
 
 
   export const ContinentPage = () => {
   const { preferences, setPreferences } = usePreferences();
-
+  
     const handleContinentSelect = (continent) => {
     if (!preferences.Continent.includes(continent)) {
         setPreferences({
@@ -49,28 +49,49 @@
     }
 
     const [loading, setLoading] = useState(false);
-
+    const [abortController, setAbortController] = useState(null)
     const navigate = useNavigate();
+
+    useEffect(() => {
+      const cleanup = () => {
+        // Cancel ongoing request if component unmounts or user navigates away
+        if (abortController) {
+          abortController.abort();
+        }
+      };
+      window.addEventListener('beforeunload', cleanup);
+
+      return () => {
+        window.removeEventListener('beforeunload', cleanup);
+        cleanup();
+      };
+    }, [abortController]);
+
     const handleNextpage = async () => {
       setLoading(true);
       const continents = preferences.Continent;
-  
+      const controller = new AbortController()
+      setAbortController(controller)
+      
       try {
-        const data = await sendContinents(continents);
-  
-        if (!preferences.citiesData.includes(data)) {
-          setPreferences((prevPreferences) => ({
-            ...prevPreferences,
-            citiesData: [...prevPreferences.citiesData, data],
-          }));
+          const data = await sendContinents(continents, { signal: controller.signal });
+    
+          if (!preferences.citiesData.includes(data)) {
+            setPreferences((prevPreferences) => ({
+              ...prevPreferences,
+              citiesData: [...prevPreferences.citiesData, data],
+            }));
+          }
+          navigate('/Date');
+        } catch (error) {
+          // Handle error and redirect to ApiRedirectModel
+          console.log(error)
+          navigate('/ApiRedirect');
+        } finally {
+          setLoading(false)
+          setAbortController(null)
         }
-  
-        navigate('/Date');
-      } catch (error) {
-        // Handle error and redirect to ApiRedirectModel
-        navigate('/ApiRedirect');
-      }
-    };
+      };
 
   return (
   <div>
