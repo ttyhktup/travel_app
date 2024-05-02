@@ -10,7 +10,7 @@ import random
 
 # Create the Flask app
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
 
 @app.route('/continents', methods=['POST'])
 def receive_continents():
@@ -62,11 +62,11 @@ def receive_preferences():
         print(locations_lst)
         
         random.shuffle(locations_lst)
+        print(locations_lst)
         return jsonify(locations_lst), 201
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-
 
 # Run the app
 if __name__ == "__main__":
