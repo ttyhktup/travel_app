@@ -1,0 +1,37 @@
+.location-container{
+  align-self: center;
+  height: 70%;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(45, 45, 45);
+  justify-content: space-between;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 15px;
+  background-color: #f4f4f4;
+}
+
+.location-button {
+  height: 40px;
+  width: 100%;
+  background-color: #ffffff;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid #4cb7aa;
+  font-weight: bold;
+}
+
+.location-button a {
+  text-decoration: none;
+  color: rgb(61, 61, 61);
+}
+
+.location-button:hover {
+  background-color: #f4fffe;
+}
+
+.location-city {
+  font-size: 20px;
+  font-weight: bold;
+}

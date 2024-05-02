@@ -7,6 +7,7 @@ import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
+import NoRecommendationsModel from '../../components/NoRecommendation';
 
 const MapboxMap = (props) => {
 // Add your Mapbox Access Token here
@@ -135,78 +136,97 @@ const handleClick = () => {
 
 const zoom = 1;
 
-useEffect(() => {
-    const getRecommendations = async (preferences) => {
-        if (!dataReceived) {
-        const data = await sendTravelPreferences(preferences);
-    
-        if (!preferences.recommendations.includes(data)) {
-            setDataReceived(data);
-            setCurrentDict(data[index]);
-            setCity(Object.keys(data[index])[0]);
-            setValues(Object.values(data[index])[0]);
-            
-            var latitudeLongitudeList = []
-            for (var i = 0; i < data.length; i++) {
-                for (var key in data[i]){
-                    latitudeLongitudeList.push(data[i][key][4])
-                    latitudeLongitudeList.push(data[i][key][3])
-            }
-        }
-            setLatLong(latitudeLongitudeList)
-
-            const newPreferences = {
-                ...preferences,
-                recommendations: [...preferences.recommendations, data]
-            }
-            
-            setPreferences(newPreferences)
-        }
+    useEffect(() => {
+        const abortController = new AbortController()
         
-        setLoading(false);
-}
-} 
-getRecommendations(preferences)
-}, [dataReceived])
+        const getRecommendations = async (preferences) => {
+            
+            try {
+                const data = await sendTravelPreferences(preferences, { signal: abortController.signal });
+                
+                if (Array.isArray(data) && data.length === 0) {
+                    // Render the "No Recommendations available" HTML
+                    setLoading(false);
+                    return; // Exit the function
+                }
 
-return (
-<div>
-    { loading ? (
-        <div className='loader-container'>
-        <div className="loader">   
-        <BounceLoader
-            color= {"#5bcfc2"}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-        />
-        <div><p className="wait">Good things come to those who wait...</p></div>
-        </div>
-        </div>
-    ) : 
-    ( 
-    <div className="recommendations-container">
-        <h3>YOUR RECOMMENDATIONS</h3>
-        {currentDict && city && values && (
-            <div className="recommendation">
-            <div className='recommendation-location'> 
-                <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
-            </div>
-            <div className='recommendation-map'>
-                <MapboxMap latLong={latLong} zoom={zoom}/> 
-                <button className='recommendation-button' id="fly" onClick={() => handleClick()}>Next Recommendation</button>
-            </div>
-            </div>
-        )}
-        {currentDict === null && (
-            <p>No recommendations available.</p>
-        )}
-    </div>
-    )
-    
+                if (!preferences.recommendations.includes(data)) {
+                    
+                    setDataReceived(data);
+                    setCurrentDict(data[index]);
+                    setCity(Object.keys(data[index])[0]);
+                    setValues(Object.values(data[index])[0]);
+                    
+                    var latitudeLongitudeList = []
+                    for (var i = 0; i < data.length; i++) {
+                        for (var key in data[i]){
+                            latitudeLongitudeList.push(data[i][key][4])
+                            latitudeLongitudeList.push(data[i][key][3])
+                    }
+                }
+                setLatLong(latitudeLongitudeList)
+
+                const newPreferences = {
+                    ...preferences,
+                    recommendations: [...preferences.recommendations, data]
+                }
+                
+                setPreferences(newPreferences)
+            }
+            
+            setLoading(false);
+    } catch (error) {
+        if (error.name == 'AbortError') {
+            console.log('continuing...')
+        } else {
+            console.error("Error fetching data:", error)
+        }
     }
-</div>
-);
+} 
+    getRecommendations(preferences)
+
+    return () => {
+        abortController.abort();
+    };
+}
+, [])
+    
+    return (
+    <div>
+        { loading ? (
+            <div className='loader-container'>
+            <div className="loader"> 
+            <BounceLoader
+                color= {"#5bcfc2"}
+                loading={loading}
+                size={100}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            <div><p className="wait">Good things come to those who wait...</p></div>
+            </div>
+            </div>  
+        ) : 
+        ( 
+            <div className="recommendations-container">
+            <h3>YOUR RECOMMENDATIONS</h3>
+            {currentDict && city && values && (
+                <div className="recommendation">
+                    <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
+                    <div className='recommendation-map'>
+                        <MapboxMap latLong={latLong} zoom={zoom}/> 
+                        <button className='recommendation-button' id="fly" onClick={() => handleClick()}>Next Recommendation</button>
+                    </div>
+                </div>
+            )}
+                {!loading && currentDict === null && (
+                    <NoRecommendationsModel />
+                )}
+            </div>
+            )
+        
+        }
+    </div>
+    );
 };
 
