@@ -137,7 +137,6 @@ export const RecommendationPage = () => {
 
     useEffect(() => {
         const getRecommendations = async (preferences) => {
-        console.log("I Have Been Fired")
             if (!dataReceived) {
             const data = await sendTravelPreferences(preferences);
         
