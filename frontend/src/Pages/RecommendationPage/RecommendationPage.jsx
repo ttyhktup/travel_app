@@ -7,11 +7,8 @@ import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
-<<<<<<< HEAD
-import axios from 'axios'
-=======
 import NoRecommendationsModel from '../../components/NoRecommendation';
->>>>>>> origin
+import axios from 'axios'
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -141,15 +138,21 @@ export const RecommendationPage = () => {
     const zoom = 1;
 
     useEffect(() => {
-<<<<<<< HEAD
         const abortController = new AbortController()
         
         const getRecommendations = async (preferences) => {
             
             try {
                 const data = await sendTravelPreferences(preferences, { signal: abortController.signal });
-            
+                
+                if (Array.isArray(data) && data.length === 0) {
+                    // Render the "No Recommendations available" HTML
+                    setLoading(false);
+                    return; // Exit the function
+                }
+
                 if (!preferences.recommendations.includes(data)) {
+                    
                     setDataReceived(data);
                     setCurrentDict(data[index]);
                     setCity(Object.keys(data[index])[0]);
@@ -161,32 +164,6 @@ export const RecommendationPage = () => {
                             latitudeLongitudeList.push(data[i][key][4])
                             latitudeLongitudeList.push(data[i][key][3])
                     }
-=======
-        const getRecommendations = async (preferences) => {
-            if (!dataReceived) {
-            const data = await sendTravelPreferences(preferences);
-            console.log("data here", data);
-
-            if (Array.isArray(data) && data.length === 0) {
-                // Render the "No Recommendations available" HTML
-                setLoading(false);
-                return; // Exit the function
-            }
-        
-            
-            
-            if (!preferences.recommendations.includes(data)) {
-                setDataReceived(data);
-                setCurrentDict(data[index]);
-                setCity(Object.keys(data[index])[0]);
-                setValues(Object.values(data[index])[0]);
-                
-                var latitudeLongitudeList = []
-                for (var i = 0; i < data.length; i++) {
-                    for (var key in data[i]){
-                        latitudeLongitudeList.push(data[i][key][4])
-                        latitudeLongitudeList.push(data[i][key][3])
->>>>>>> origin
                 }
                 setLatLong(latitudeLongitudeList)
 
