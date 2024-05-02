@@ -6,7 +6,7 @@ export const Location = (props) => {
         <h1>{props.cityName}</h1>
         <h3>{props.countryName}</h3>
         <article>Average Temp During Your Trip: {props.Temp}</article>
-        <a href={props.bookingLink}>Book a Hotel</a>
+        <a href={props.bookingLink} target="_blank" rel="noreferrer">Book a Hotel</a>
         </>
     )
 }
