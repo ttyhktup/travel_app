@@ -137,32 +137,33 @@ export const RecommendationPage = () => {
     const zoom = 1;
 
     useEffect(() => {
-        const getRecommendations = async (preferences) => {
-            if (!dataReceived) {
-            const data = await sendTravelPreferences(preferences);
-            console.log("data here", data);
-
-            if (Array.isArray(data) && data.length === 0) {
-                // Render the "No Recommendations available" HTML
-                setLoading(false);
-                return; // Exit the function
-            }
+        const abortController = new AbortController()
         
+        const getRecommendations = async (preferences) => {
             
-            
-            if (!preferences.recommendations.includes(data)) {
-                setDataReceived(data);
-                setCurrentDict(data[index]);
-                setCity(Object.keys(data[index])[0]);
-                setValues(Object.values(data[index])[0]);
+            try {
+                const data = await sendTravelPreferences(preferences, { signal: abortController.signal });
                 
-                var latitudeLongitudeList = []
-                for (var i = 0; i < data.length; i++) {
-                    for (var key in data[i]){
-                        latitudeLongitudeList.push(data[i][key][4])
-                        latitudeLongitudeList.push(data[i][key][3])
+                if (Array.isArray(data) && data.length === 0) {
+                    // Render the "No Recommendations available" HTML
+                    setLoading(false);
+                    return; // Exit the function
                 }
-            }
+
+                if (!preferences.recommendations.includes(data)) {
+                    
+                    setDataReceived(data);
+                    setCurrentDict(data[index]);
+                    setCity(Object.keys(data[index])[0]);
+                    setValues(Object.values(data[index])[0]);
+                    
+                    var latitudeLongitudeList = []
+                    for (var i = 0; i < data.length; i++) {
+                        for (var key in data[i]){
+                            latitudeLongitudeList.push(data[i][key][4])
+                            latitudeLongitudeList.push(data[i][key][3])
+                    }
+                }
                 setLatLong(latitudeLongitudeList)
 
                 const newPreferences = {
@@ -174,10 +175,21 @@ export const RecommendationPage = () => {
             }
             
             setLoading(false);
+    } catch (error) {
+        if (error.name == 'AbortError') {
+            console.log('continuing...')
+        } else {
+            console.error("Error fetching data:", error)
+        }
     }
 } 
     getRecommendations(preferences)
-    }, [dataReceived])
+
+    return () => {
+        abortController.abort();
+    };
+}
+, [])
     
     return (
     <div>
