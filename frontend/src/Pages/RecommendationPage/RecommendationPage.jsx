@@ -140,11 +140,15 @@ export const RecommendationPage = () => {
         const getRecommendations = async (preferences) => {
             if (!dataReceived) {
             const data = await sendTravelPreferences(preferences);
-            console.log("data here", data)
-        
-            // if (data === []) {
+            console.log("data here", data);
 
-            // }
+            if (Array.isArray(data) && data.length === 0) {
+                // Render the "No Recommendations available" HTML
+                setLoading(false);
+                return; // Exit the function
+            }
+        
+            
             
             if (!preferences.recommendations.includes(data)) {
                 setDataReceived(data);
@@ -191,23 +195,23 @@ export const RecommendationPage = () => {
         ) : 
         ( 
             <div className="Continent">
-            <h3>YOUR RECOMMENDATIONS</h3>
-            {loading && <p>Loading...</p>}
-            <br />
-            {!loading && currentDict && city && values && values[3] && values[4] && (
-                <>
-                    <MapboxMap latitude={values[3]} longitude={values[4]} zoom={zoom}/> 
-                    <br />
-                    <button id="fly" onClick={() => handleClick()}>Fly</button>
-                    <br />
+                <h3>YOUR RECOMMENDATIONS</h3>
+                {loading && <p>Loading...</p>}
+                <br></br>
+                {!loading && currentDict && city && values && (
+                    <>
+                    <MapboxMap latLong={latLong} zoom={zoom}/> 
+                    <br></br>
+                    <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
+                    <br></br>
                     <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
-                </>
-            )}
-            {!loading && (!currentDict || !city || !values || !values[3] || !values[4] || !dataReceived) && (
-                <NoRecommendationsModel />
-            )}
-        </div>
-        )
+                    </>
+                )}
+                {!loading && currentDict === null && (
+                    <NoRecommendationsModel />
+                )}
+            </div>
+            )
         
         }
     </div>
