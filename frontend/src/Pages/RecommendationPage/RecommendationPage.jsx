@@ -7,6 +7,7 @@ import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
+import NoRecommendationsModel from '../../components/NoRecommendation';
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -139,7 +140,12 @@ export const RecommendationPage = () => {
         const getRecommendations = async (preferences) => {
             if (!dataReceived) {
             const data = await sendTravelPreferences(preferences);
+            console.log("data here", data)
         
+            // if (data === []) {
+
+            // }
+            
             if (!preferences.recommendations.includes(data)) {
                 setDataReceived(data);
                 setCurrentDict(data[index]);
@@ -184,21 +190,21 @@ export const RecommendationPage = () => {
             </div>
         ) : 
         ( 
-        <div className="Continent">
+            <div className="Continent">
             <h3>YOUR RECOMMENDATIONS</h3>
             {loading && <p>Loading...</p>}
-            <br></br>
-            {!loading && currentDict && city && values && (
+            <br />
+            {!loading && currentDict && city && values && values[3] && values[4] && (
                 <>
-                <MapboxMap latLong={latLong} zoom={zoom}/> 
-                <br></br>
-                <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
-                <br></br>
-                <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
+                    <MapboxMap latitude={values[3]} longitude={values[4]} zoom={zoom}/> 
+                    <br />
+                    <button id="fly" onClick={() => handleClick()}>Fly</button>
+                    <br />
+                    <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
                 </>
             )}
-            {!loading && currentDict === null && (
-                <p>No recommendations available.</p>
+            {!loading && (!currentDict || !city || !values || !values[3] || !values[4] || !dataReceived) && (
+                <NoRecommendationsModel />
             )}
         </div>
         )
