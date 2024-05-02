@@ -1,0 +1,59 @@
+
+.model-API {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.model-API::after{
+  content: "";
+  background: url("/assets/background-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.model-content-API {
+  font-size: larger;
+  font-style: italic;
+  text-align: center;
+  align-items: center;
+  padding: 2%;
+  border-radius: 5%;
+  height: 12em;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+}
+
+.model-button-API {
+  display: block;
+  position: relative;
+  margin: 0px auto;
+  width: 50%;
+  height: 42px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #4cb7aa;
+}
+
+.model-button-API:hover{
+  background: #48aa9e;
+}
