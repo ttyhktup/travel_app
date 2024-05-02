@@ -2,7 +2,9 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // const apiUrl = 'http://localhost:8080';
 
-export const sendTravelPreferences = async (preferences) => {
+export const sendTravelPreferences = async (preferences, options = {}) => {
+  
+  const { signal } = options;
   console.log("sending signal to backend", preferences);
   const requestOptions = {
     method: "POST",
@@ -10,6 +12,7 @@ export const sendTravelPreferences = async (preferences) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(preferences),
+    signal: signal
   };
 
   const response = await fetch(`${BACKEND_URL}/preferences`, requestOptions);

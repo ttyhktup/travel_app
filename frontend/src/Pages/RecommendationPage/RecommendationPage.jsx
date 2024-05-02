@@ -7,6 +7,7 @@ import './RecommendationPage.css'
 import { Location } from '../../components/Location';
 import { sendTravelPreferences } from '../../Services/BackendService';
 import BounceLoader from "react-spinners/BounceLoader";
+import axios from 'axios'
 
 const MapboxMap = (props) => {
     // Add your Mapbox Access Token here
@@ -136,23 +137,26 @@ export const RecommendationPage = () => {
     const zoom = 1;
 
     useEffect(() => {
-        const getRecommendations = async (preferences) => {
-            if (!dataReceived) {
-            const data = await sendTravelPreferences(preferences);
+        const abortController = new AbortController()
         
-            if (!preferences.recommendations.includes(data)) {
-                setDataReceived(data);
-                setCurrentDict(data[index]);
-                setCity(Object.keys(data[index])[0]);
-                setValues(Object.values(data[index])[0]);
-                
-                var latitudeLongitudeList = []
-                for (var i = 0; i < data.length; i++) {
-                    for (var key in data[i]){
-                        latitudeLongitudeList.push(data[i][key][4])
-                        latitudeLongitudeList.push(data[i][key][3])
+        const getRecommendations = async (preferences) => {
+            
+            try {
+                const data = await sendTravelPreferences(preferences, { signal: abortController.signal });
+            
+                if (!preferences.recommendations.includes(data)) {
+                    setDataReceived(data);
+                    setCurrentDict(data[index]);
+                    setCity(Object.keys(data[index])[0]);
+                    setValues(Object.values(data[index])[0]);
+                    
+                    var latitudeLongitudeList = []
+                    for (var i = 0; i < data.length; i++) {
+                        for (var key in data[i]){
+                            latitudeLongitudeList.push(data[i][key][4])
+                            latitudeLongitudeList.push(data[i][key][3])
+                    }
                 }
-            }
                 setLatLong(latitudeLongitudeList)
 
                 const newPreferences = {
@@ -164,10 +168,21 @@ export const RecommendationPage = () => {
             }
             
             setLoading(false);
+    } catch (error) {
+        if (error.name == 'AbortError') {
+            console.log('continuing...')
+        } else {
+            console.error("Error fetching data:", error)
+        }
     }
 } 
     getRecommendations(preferences)
-    }, [dataReceived])
+
+    return () => {
+        abortController.abort();
+    };
+}
+, [])
     
     return (
     <div>
