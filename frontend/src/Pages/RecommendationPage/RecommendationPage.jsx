@@ -117,6 +117,7 @@ export const RecommendationPage = () => {
     const [city, setCity] = useState(null);
     const [values, setValues] = useState(null);
     const [latLong, setLatLong] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
 
 
     const handleClick = () => {
@@ -166,6 +167,12 @@ export const RecommendationPage = () => {
                 }
                 setLatLong(latitudeLongitudeList)
 
+                if (latitudeLongitudeList.length === 1) {
+                    setErrorMessage("Only one country available."); // Set error message
+                } else {
+                    setErrorMessage(null); // Reset error message if there are multiple countries
+                }
+
                 const newPreferences = {
                     ...preferences,
                     recommendations: [...preferences.recommendations, data]
@@ -214,6 +221,7 @@ export const RecommendationPage = () => {
                     <>
                     <MapboxMap latLong={latLong} zoom={zoom}/> 
                     <br></br>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                     <button id="fly" onClick={() => handleClick()}>Next Recommendation</button>
                     <br></br>
                     <Location cityName={city} countryName={values[0]} Temp={values[1]} bookingLink={values[2]}/>
