@@ -1,62 +1,126 @@
-.recommendations-container{
-  display: flex;
-  flex-direction: column;
-  min-width: 320px;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background-color: rgb(241, 241, 241);
-  color: rgb(60, 60, 60);
+@media only screen and (max-width: 600px) {
+  .recommendations-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    color: rgb(60, 60, 60);
+  }
+  
+  .recommendation{
+    border-radius: 5%;
+    background-color: #fff;
+    width: 85%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+  }
+
+  .recommendations-container h3{
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 3%;
+  }
+
+  .recommendation-map{
+    padding: 3%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    align-self: center;
+    width: 100%;
+    height: 35em;
+    position: relative; /* Position can be absolute or relative based on your layout needs */
+    top: 5px; /* Adjust based on layout */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 3%;
+  }
+
+  .mapboxgl-canvas{
+    align-self: center;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.recommendations-container h3{
-  padding: 15px;
-  width: 40%;
-  text-align: center;
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 3%;
-}
+@media only screen and (min-width: 601px) { 
 
-.recommendation{
-  border-radius: 5%;
-  background-color: #fff;
-  width: 85%;
-  height: 70vh;
-  display: flex;
-  justify-content: space-between;
-  padding: 2% 0 2% 2%;
+  .recommendations-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    color: rgb(60, 60, 60);
+  }
+
+  .recommendations-container h3{
+    padding: 15px;
+    width: 40%;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 3%;
+  }
+
+  .recommendation{
+    border-radius: 5%;
+    background-color: #fff;
+    width: 85%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 2% 0 2% 2%;
+  }
+
+  .recommendation-map{
+    padding: 3%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 30em;
+    position: relative; /* Position can be absolute or relative based on your layout needs */
+    top: 5px; /* Adjust based on layout */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 3%;
+  }
+
+  .mapboxgl-canvas{
+    align-self: center;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .recommendation-location{
   
-}
-
-.recommendation-map{
-  padding: 3%;
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.map-container {
-  width: 100%;
-  height: 35em;
-  position: relative; /* Position can be absolute or relative based on your layout needs */
-  top: 5px; /* Adjust based on layout */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin: 3%;
-}
-
-.mapboxgl-canvas{
-  align-self: center;
-  border-radius: 15px;
-  width: 90%;
-  height: 100%;
 }
 
 #fly {
