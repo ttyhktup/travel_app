@@ -5,3 +5,13 @@ pipenv==2023.12.1
 platformdirs==4.2.2
 setuptools==69.5.1
 virtualenv==20.26.2
+flask==3.1.0
+flask-cors==5.0.0
+requests==2.32.3
+dotenv-python==0.0.1
+python-dotenv==1.0.1
+pandas==2.2.3
+amadeus==11.0.0
+pytest-mock==3.14.0
+pytest==8.3.3
+asyncio==3.4.3
